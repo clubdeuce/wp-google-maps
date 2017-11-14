@@ -19,7 +19,7 @@ class TestGeocoder extends TestCase {
 	private $_geocoder;
 
 	public function setUp() {
-		$this->_geocoder = new Geocoder(['api_key' => getenv('MAPS_API_KEY')]);
+		$this->_geocoder = new Geocoder();
 	}
 
 	/**
@@ -30,7 +30,7 @@ class TestGeocoder extends TestCase {
 	 * @covers ::_get_data
 	 */
 	public function testGeocode() {
-		$location = $this->_geocoder->geocode('1600 Amphitheatre Parkway, Mountain View, CA');
+		$location = $this->_geocoder->geocode('1600 Amphitheatre Parkway, Mountain View, CA 94043');
 
 		$this->assertInstanceOf('\Clubdeuce\WPGoogleMaps\Location', $location);
 		$this->assertInternalType('string', $location->address());

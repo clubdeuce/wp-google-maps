@@ -21,7 +21,7 @@ class Geocoder {
 	function __construct( $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
-			'api_key' => '',
+			'api_key' => Google_Maps::api_key(),
 		) );
 
 		$this->_api_key = $args['api_key'];
