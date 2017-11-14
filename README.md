@@ -10,7 +10,7 @@ A Google Maps library for WordPress.
 
 ## Installation
 
-This project can be installed via [Composer[(https://getcomposer.org):
+This project can be installed via [Composer](https://getcomposer.org):
 
 `composer require clubdeuce\wp-google-maps`
 
