@@ -1,16 +1,5 @@
 # .scrutinizer.yml
 # language: php
- checks:
-     php: true
- build:
-     nodes: 
-         analysis:
-             tests:
-                 override:
-                     -
-                         command: phpcs-run
-                         use_website_config: true
-                     - php-scrutinizer-run
 tools:
   external_code_coverage: true
 filter:
