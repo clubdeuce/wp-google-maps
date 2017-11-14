@@ -10,4 +10,4 @@ require 'includes/testCase.php';
 
 require VENDOR_DIRECTORY . '/autoload.php';
 
-require_once dirname( __DIR__ ) . '/google-maps.php';
+\Clubdeuce\WPGoogleMaps\Google_Maps::initialize();

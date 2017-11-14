@@ -47,7 +47,7 @@ class Google_Maps {
 	/**
 	 *
 	 */
-	static function on_load() {
+	static function initialize() {
 
 		self::$_source_dir = dirname( __DIR__ );
 
@@ -65,7 +65,7 @@ class Google_Maps {
 		$class = strtolower( str_replace( '_', '-', end ( $parts ) ) );
 
 		foreach( array( 'includes', 'includes/helpers', 'includes/models', 'includes/views' ) as $dir ) {
-			$filename = GM_SRC_DIR . "/{$dir}/class-{$class}.php";
+			$filename = Google_Maps::source_dir() . "/{$dir}/class-{$class}.php";
 			if ( file_exists( $filename ) ) {
 				require_once $filename;
 			}

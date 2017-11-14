@@ -30,7 +30,7 @@ class Map_View {
 	public function the_map( $args = array() ) { 
 		
 		$args = wp_parse_args( $args, array(
-			'template' => GM_SRC_DIR . '/templates/map-view.php',
+			'template' => Google_Maps::source_dir() . '/templates/map-view.php',
 		) );
 
 		$height       = $this->_model->height();
