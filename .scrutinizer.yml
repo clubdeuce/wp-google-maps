@@ -1,5 +1,6 @@
 # .scrutinizer.yml
 tools:
   external_code_coverage: true
-excluded_paths:
-  - "tests/"
+filter:
+  excluded_paths:
+    - "tests/"
