@@ -1,0 +1,32 @@
+language: php
+php:
+  - 7.0
+  - 7.1
+
+env:
+  - WP_VERSION="4.8.1"
+  - WP_VERSION="4.8.2"
+  - WP_VERSION="4.8.3"
+
+mysql:
+  database: test_db
+  username: root
+  encoding: utf8
+
+install:
+  - composer install
+
+before_script:
+  - export WP_TESTS_DIR=/tmp/wp-tests
+  - svn checkout http://develop.svn.wordpress.org/tags/${WP_VERSION} ${WP_TESTS_DIR}
+  - mysql -e 'CREATE DATABASE test_db;'
+  - cp ${WP_TESTS_DIR}/wp-tests-config-sample.php ${WP_TESTS_DIR}/wp-tests-config.php
+  - sed -i 's/youremptytestdbnamehere/test_db/' ${WP_TESTS_DIR}/wp-tests-config.php
+  - sed -i 's/yourusernamehere/root/' ${WP_TESTS_DIR}/wp-tests-config.php
+  - sed -i 's/yourpasswordhere//' ${WP_TESTS_DIR}/wp-tests-config.php
+
+script: ./vendor/bin/phpunit --coverage-clover=clover.xml -c ./tests/phpunit.xml.dist
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover clover.xml
