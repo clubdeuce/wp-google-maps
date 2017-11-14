@@ -1,5 +1,10 @@
 # WP Google Maps
 
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/clubdeuce/wp-google-maps.svg?columns=all)](https://waffle.io/clubdeuce/wp-google-maps)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/?branch=master)
+[![Build Status](https://travis-ci.org/clubdeuce/wp-google-maps.svg?branch=master)](https://travis-ci.org/clubdeuce/wp-google-maps)
+
 A Google Maps library for WordPress.
 
 
