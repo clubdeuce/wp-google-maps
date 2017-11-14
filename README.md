@@ -28,6 +28,7 @@ use Clubdeuce\WPGoogleMaps\Map;
 use Clubdeuce\WPGoogleMaps\Marker;
 use Clubdeuce\WPGoogleMaps\Map_View;
 
+Google_Maps::initialize();
 Google_Maps::register_script_condition( 'is_single' );
 $map = new Map();
 $map->add_marker( new Marker( array( 'address' => '1600 Amphitheatre Parkway, Mountain View, CA 94043') ) );
