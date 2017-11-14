@@ -30,8 +30,8 @@ class TestGeocoder extends TestCase {
 	 * @covers ::_get_data
 	 */
 	public function testGeocode() {
-		$location = $this->_geocoder->geocode('1600 Amphitheatre Parkway, Mountain View, CA 94043');
-print_r($location);
+		$location = $this->_geocoder->geocode('1600 Amphitheatre Parkway Mountain View CA');
+
 		$this->assertInstanceOf('\Clubdeuce\WPGoogleMaps\Location', $location);
 		$this->assertInternalType('string', $location->address());
 		$this->assertInternalType('string', $location->formatted_address());
