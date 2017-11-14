@@ -2,11 +2,22 @@
 
 A Google Maps library for WordPress.
 
+
+## Installation
+
+This project can be installed via [Composer[(https://getcomposer.org):
+
+`composer require clubdeuce\wp-google-maps`
+
+Simply include `autoload.php` from your `vendor` directory and the library will be included.
+
+
 ## Usage
 
 A simple example:
 
 ```
+
 use Clubdeuce\WPGoogleMaps\Google_Maps;
 use Clubdeuce\WPGoogleMaps\Map;
 use Clubdeuce\WPGoogleMaps\Marker;
