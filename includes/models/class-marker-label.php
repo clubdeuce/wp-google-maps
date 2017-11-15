@@ -79,6 +79,51 @@ class Marker_Label extends Model_Base {
 	}
 
 	/**
+	 * @param string $color
+	 */
+	function set_color( $color ) {
+
+		$this->_color = $color;
+
+	}
+
+	/**
+	 * @param string $font
+	 */
+	function set_font_family( $font ) {
+
+		$this->_font_family = $font;
+
+	}
+
+	/**
+	 * @param string $size
+	 */
+	function set_font_size( $size ) {
+
+		$this->_font_size = $size;
+
+	}
+
+	/**
+	 * @param string $weight
+	 */
+	function set_font_weight( $weight ) {
+
+		$this->_font_weight = $weight;
+
+	}
+
+	/**
+	 * @param string $text
+	 */
+	function set_text( $text ) {
+
+		$this->_text = $text;
+
+	}
+
+	/**
 	 * @return string
 	 *
 	 * @todo Is this used? If not, remove it.

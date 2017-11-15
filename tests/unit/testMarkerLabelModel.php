@@ -77,6 +77,61 @@ class testMarkerLabelModel extends TestCase {
 	}
 
 	/**
+	 * @covers ::set_color
+	 * @covers ::color
+	 */
+	public function testSetColor() {
+
+		$this->_model->set_color( '#FFFFFF' );
+		$this->assertEquals( '#FFFFFF', $this->_model->color() );
+
+	}
+
+	/**
+	 * @covers ::set_font_family
+	 * @covers ::font_family
+	 */
+	public function testSetFontFamily() {
+
+		$this->_model->set_font_family( 'Helvetica' );
+		$this->assertEquals( 'Helvetica', $this->_model->font_family() );
+
+	}
+
+	/**
+	 * @covers ::set_font_size
+	 * @covers ::font_size
+	 */
+	public function testSetFontSize() {
+
+		$this->_model->set_font_size( '52px' );
+		$this->assertEquals( '52px', $this->_model->font_size() );
+
+	}
+
+	/**
+	 * @covers ::set_font_weight
+	 * @covers ::font_weight
+	 */
+	public function testSetFontWeight() {
+
+		$this->_model->set_font_weight( 900 );
+		$this->assertEquals( '900', $this->_model->font_weight() );
+
+	}
+
+	/**
+	 * @covers ::set_text
+	 * @covers ::text
+	 */
+	public function testSetText() {
+
+		$this->_model->set_text( 'Foo text' );
+		$this->assertEquals( 'Foo text', $this->_model->text() );
+
+	}
+
+	/**
 	 * @covers ::options
 	 */
 	public function testOptionsEmpty() {
