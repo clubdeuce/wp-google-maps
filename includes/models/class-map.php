@@ -119,6 +119,47 @@ class Map extends Model_Base {
 	}
 
 	/**
+	 * @param array $center
+	 */
+	function set_center( $center ) {
+
+		$center = wp_parse_args( $center, array(
+			'lat' => null,
+			'lng' => null,
+		) );
+
+		$this->_center = $center;
+
+	}
+
+	/**
+	 * @param int $zoom
+	 */
+	function set_zoom( $zoom ) {
+
+		$this->_zoom = (int)$zoom;
+
+	}
+
+	/**
+	 * @param string $height
+	 */
+	function set_height( $height ) {
+
+		$this->_height = $height;
+
+	}
+
+	/**
+	 * @param string $id
+	 */
+	function set_html_id( $id ) {
+
+		$this->_html_id = $id;
+
+	}
+
+	/**
 	 * @return array
 	 *
 	 * @todo Refactor to make_params

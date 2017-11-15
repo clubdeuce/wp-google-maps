@@ -130,4 +130,52 @@ class testMapModel extends TestCase {
 
 	}
 
+	/**
+	 * @covers  ::set_center
+	 * @covers  ::center
+	 * @depends testCenter
+	 */
+	public function testSetCenter() {
+
+		$this->_model->set_center(array( 'lat' => 123.45, 'lng' => -123.45 ));
+		$this->assertEquals(array( 'lat' => 123.45, 'lng' => -123.45 ), $this->_model->center());
+
+	}
+
+	/**
+	 * @covers  ::set_zoom
+	 * @covers  ::zoom
+	 * @depends testZoom
+	 */
+	public function testSetZoom() {
+
+		$this->_model->set_zoom(1);
+		$this->assertEquals(1, $this->_model->zoom());
+
+	}
+
+	/**
+	 * @covers  ::set_height
+	 * @covers  ::height
+	 * @depends testHeight
+	 */
+	public function testSetHeight() {
+
+		$this->_model->set_height('1px');
+		$this->assertEquals('1px', $this->_model->height());
+
+	}
+
+	/**
+	 * @covers  ::set_html_id
+	 * @covers  ::html_id
+	 * @depends testHtmlId
+	 */
+	public function testSetHtmlId() {
+
+		$this->_model->set_html_id('fooid');
+		$this->assertEquals('fooid', $this->_model->html_id());
+
+	}
+
 }
