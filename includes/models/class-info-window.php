@@ -38,7 +38,7 @@ class Info_Window extends Model_Base {
 	}
 
 	/**
-	 * @param string $offset
+	 * @param int $offset
 	 */
 	public function set_pixel_offset( $offset ) {
 
@@ -61,7 +61,7 @@ class Info_Window extends Model_Base {
 	}
 
 	/**
-	 * @param string $width
+	 * @param int $width
 	 */
 	public function set_max_width( $width ) {
 
