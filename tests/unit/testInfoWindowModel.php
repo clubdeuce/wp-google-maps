@@ -67,4 +67,64 @@ class TestInfoWindowModel extends TestCase {
 
 	}
 
+	/**
+	 * @covers  ::set_content
+	 * @depends testContent
+	 */
+	public function testSetContent() {
+
+		$this->_model->set_content( 'Foo Content' );
+		$this->assertEquals( 'Foo Content', $this->_model->content() );
+
+	}
+
+	/**
+	 * @covers  ::set_pixel_offset
+	 * @depends testPixelOffset
+	 */
+	public function testSetPixelOffset() {
+
+		$this->_model->set_pixel_offset( '22' );
+		$this->assertEquals(22, $this->_model->pixel_offset() );
+
+	}
+
+	/**
+	 * @covers  ::set_position
+	 * @depends testPosition
+	 */
+	public function testSetPosition() {
+
+		$this->_model->set_position(array('lat' => 123.45, 'lng' => -123.45));
+		$this->assertEquals(array('lat' => 123.45, 'lng' => -123.45), $this->_model->position());
+
+	}
+
+	/**
+	 * @covers  ::set_position
+	 * @depends testSetPosition
+	 */
+	public function testSetPositionWrong() {
+
+		$this->_model->set_position('foo');
+
+		$position = $this->_model->position();
+
+		$this->assertInternalType('array', $position);
+		$this->assertArrayHasKey('lat', $position);
+		$this->assertArrayHasKey('lng', $position);
+		$this->assertNull($position['lat']);
+		$this->assertNull($position['lng']);
+
+	}
+
+	/**
+	 * @covers  ::set_max_width
+	 * @depends testMaxWidth
+	 */
+	public function testSetMaxWidth() {
+
+		$this->_model->set_max_width( '400px' );
+		$this->assertEquals('400px', $this->_model->max_width());
+	}
 }
