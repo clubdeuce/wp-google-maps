@@ -5,6 +5,11 @@ namespace Clubdeuce\WPGoogleMaps;
 /**
  * Class Info_Window
  * @package Clubdeuce\WPGoogleMaps
+ *
+ * @method string content()
+ * @method int    pixel_offset()
+ * @method array  position()
+ * @method int    max_width()
  */
 class Info_Window extends Model_Base {
 
