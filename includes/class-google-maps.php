@@ -172,6 +172,15 @@ class Google_Maps {
 	/**
 	 * @return string
 	 */
+	static function source_dir() {
+
+		return self::$_source_dir;
+
+	}
+
+	/**
+	 * @return string
+	 */
 	static function source_url() {
 
 		$path = dirname( __DIR__ );
