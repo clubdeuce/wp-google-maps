@@ -47,7 +47,7 @@ class Google_Maps {
 	/**
 	 *
 	 */
-	static function initialize() {
+	public static function initialize() {
 
 		self::$_source_dir = dirname( __DIR__ );
 
@@ -58,7 +58,7 @@ class Google_Maps {
 	/**
 	 * @return string
 	 */
-	static function api_key() {
+	public static function api_key() {
 
 		return static::$_api_key;
 
@@ -67,7 +67,7 @@ class Google_Maps {
 	/**
 	 * @return Geocoder
 	 */
-	static function geocoder() {
+	public static function geocoder() {
 
 		if ( ! isset( static::$_geocoder ) ) {
 			static::$_geocoder = new Geocoder( ['api_key' => self::api_key() ] );
@@ -81,7 +81,7 @@ class Google_Maps {
 	 * @param  array $args
 	 * @return Map
 	 */
-	static function make_new_map( $args = array() ) {
+	public static function make_new_map( $args = array() ) {
 
 		$class = __NAMESPACE__ . '\Map';
 		return new $class( $args );
@@ -91,7 +91,7 @@ class Google_Maps {
 	/**
 	 * @param string $key
 	 */
-	static function register_api_key( $key ) {
+	public static function register_api_key( $key ) {
 
 		static::$_api_key = filter_var( $key, FILTER_SANITIZE_STRING );
 
@@ -100,13 +100,13 @@ class Google_Maps {
 	/**
 	 * @param callable $condition
 	 */
-	static function register_script_condition( $condition ) {
+	public static function register_script_condition( $condition ) {
 
 		static::$_script_conditions[] = $condition;
 
 	}
 
-	static function _wp_enqueue_scripts_9() {
+	public static function _wp_enqueue_scripts_9() {
 
 		$key    = static::api_key();
 		$source = sprintf( '%1$s/dist/scripts/maps.min.js', self::source_url() );
@@ -133,7 +133,7 @@ class Google_Maps {
 
 	}
 
-	static function script_conditions() {
+	public static function script_conditions() {
 
 		return static::$_script_conditions;
 
@@ -144,7 +144,7 @@ class Google_Maps {
 	 * @param  array  $args
 	 * @return Marker
 	 */
-	static function make_marker_by_address( $address, $args = array() ) {
+	public static function make_marker_by_address( $address, $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
 			'address' => $address,
@@ -160,7 +160,7 @@ class Google_Maps {
 	 * @param  array  $args
 	 * @return string
 	 */
-	static function driving_directions_href($destination, $args = array() ) {
+	public static function driving_directions_href($destination, $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
 			'start' => 'My Location',
@@ -172,7 +172,7 @@ class Google_Maps {
 	/**
 	 * @return string
 	 */
-	static function source_dir() {
+	public static function source_dir() {
 
 		return self::$_source_dir;
 
@@ -181,7 +181,7 @@ class Google_Maps {
 	/**
 	 * @return string
 	 */
-	static function source_url() {
+	public static function source_url() {
 
 		$path = dirname( __DIR__ );
 
@@ -195,7 +195,7 @@ class Google_Maps {
 
 	}
 
-	static function version() {
+	public static function version() {
 
 		return self::$_version;
 

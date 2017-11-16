@@ -18,7 +18,7 @@ class Geocoder {
 	 *
 	 * @param array $args
 	 */
-	function __construct( $args = array() ) {
+	public function __construct( $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
 			'api_key' => Google_Maps::api_key(),
@@ -31,7 +31,7 @@ class Geocoder {
 	/**
 	 * @return string
 	 */
-	function api_key() {
+	public function api_key() {
 
 		return $this->_api_key;
 
@@ -41,7 +41,7 @@ class Geocoder {
 	 * @param  string $address
 	 * @return Location|\WP_Error
 	 */
-	function geocode( $address ) {
+	public function geocode( $address ) {
 
 		$location = new \WP_Error(100, 'No results found', array( 'address' => $address ) );
 		$url = $this->_make_url( $address );
