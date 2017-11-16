@@ -14,7 +14,12 @@ class Geocoder {
 	protected $_api_key;
 
 	/**
-	 * KSA_Geocoder constructor.
+	 * @var HTTP
+	 */
+	protected $_http;
+
+	/**
+	 * Geocoder constructor.
 	 *
 	 * @param array $args
 	 */
@@ -22,9 +27,11 @@ class Geocoder {
 
 		$args = wp_parse_args( $args, array(
 			'api_key' => Google_Maps::api_key(),
+			'http'    => new HTTP(),
 		) );
 
 		$this->_api_key = $args['api_key'];
+		$this->_http    = $args['http'];
 
 	}
 
@@ -43,14 +50,25 @@ class Geocoder {
 	 */
 	public function geocode( $address ) {
 
-		$location = new \WP_Error(100, 'No results found', array( 'address' => $address ) );
 		$url = $this->_make_url( $address );
 
-		$response = $this->_make_request( $url );
+		$response = $this->_http->make_request( $url );
 
-		if ( ! is_wp_error( $response ) && count( $response['results'] ) > 0 ) {
-			$location = $this->_make_location( $response['results'][0] );
-		}
+		do {
+			if ( is_wp_error( $response ) ) {
+				$location = $response;
+				break;
+			}
+
+			$results = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( 0 === count( $results['results'] ) ) {
+				$location = new \WP_Error( '100', sprintf( '%1$s: %2$s', $results['status'], $results['error_message'] ) );
+				break;
+			}
+
+			$location = $this->_make_location( $results['results'][0] );
+		} while ( false );
 
 		return $location;
 
@@ -133,46 +151,6 @@ class Geocoder {
 		}
 
 		return $result_value;
-
-	}
-
-	/**
-	 * @param  string $url
-	 * @return array|\WP_Error
-	 */
-	private function _make_request( $url ) {
-
-		$return = new \WP_Error( 1, 'Invalid URL', $url );
-
-		if ( wp_http_validate_url( $url ) ) {
-			$request = $this->_get_data( $url );
-
-			$return = new \WP_Error( $request['response']['code'], $request['response']['message'] );
-
-			if ( 200 == $request['response']['code'] ) {
-				$return = json_decode( $request['body'], true );
-			}
-
-		}
-
-		return $return;
-
-	}
-
-	/**
-	 * @param $url
-	 * @return array|\WP_Error
-	 */
-	private function _get_data( $url ) {
-
-		$cache_key = md5( serialize( $url ) );
-
-		if ( ! $data = wp_cache_get( $cache_key ) ) {
-			$data = wp_remote_get( $url );
-			wp_cache_add( $cache_key, $data, 300 );
-		}
-
-		return $data;
 
 	}
 

@@ -3,6 +3,8 @@
 namespace Clubdeuce\WPGoogleMaps\Tests\Integration;
 
 use Clubdeuce\WPGoogleMaps\Geocoder;
+use Clubdeuce\WPGoogleMaps\Google_Maps;
+use Clubdeuce\WPGoogleMaps\Location;
 use Clubdeuce\WPGoogleMaps\Tests\TestCase;
 
 /**
@@ -19,6 +21,7 @@ class TestGeocoder extends TestCase {
 	private $_geocoder;
 
 	public function setUp() {
+		Google_Maps::register_api_key(getenv('MAPS_API_KEY'));
 		$this->_geocoder = new Geocoder();
 	}
 
@@ -26,13 +29,11 @@ class TestGeocoder extends TestCase {
 	 * @covers ::geocode
 	 * @covers ::_make_location
 	 * @covers ::_make_url
-	 * @covers ::_make_request
-	 * @covers ::_get_data
 	 */
 	public function testGeocode() {
-		$location = $this->_geocoder->geocode('1600 Amphitheatre Parkway Mountain View CA');
+		$location = $this->_geocoder->geocode('1600 Pennsylvania Avenue NW Washington DC');
 
-		$this->assertInstanceOf('\Clubdeuce\WPGoogleMaps\Location', $location);
+		$this->assertInstanceOf(Location::class, $location);
 		$this->assertInternalType('string', $location->address());
 		$this->assertInternalType('string', $location->formatted_address());
 		$this->assertInternalType('double', $location->latitude());
@@ -50,5 +51,15 @@ class TestGeocoder extends TestCase {
 		$this->assertArrayHasKey('lng', $location->viewport()['southwest']);
 		$this->assertInternalType('double', $location->viewport()['southwest']['lat']);
 		$this->assertInternalType('double', $location->viewport()['southwest']['lng']);
+	}
+
+	/**
+	 * @covers ::geocode
+	 */
+	public function testGeocodeFailureBadAPIKey() {
+
+		$geocoder = new Geocoder(array('api_key' => 'foo'));
+		$this->assertInstanceOf( \WP_Error::class, $geocoder->geocode('1600 Pennsylvania Avenue NW Washington DC'));
+
 	}
 }

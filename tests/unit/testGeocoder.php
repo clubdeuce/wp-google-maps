@@ -3,8 +3,10 @@
 namespace Clubdeuce\WPGoogleMaps\Tests\UnitTests;
 
 use Clubdeuce\WPGoogleMaps\Geocoder;
+use Clubdeuce\WPGoogleMaps\HTTP;
 use Clubdeuce\WPGoogleMaps\Location;
 use Clubdeuce\WPGoogleMaps\Tests\TestCase;
+use Mockery\Mock;
 
 /**
  * Class TestGeocoder
@@ -51,15 +53,6 @@ class TestGeocoder extends TestCase {
 	}
 
 	/**
-	 * @covers ::_get_data
-	 */
-	public function testGetDataCache() {
-		wp_cache_add( md5(serialize('foo.bar')), 'foobar');
-
-		$this->assertEquals('foobar', $this->reflectionMethodInvokeArgs($this->_geocoder, '_get_data', 'foo.bar'));
-	}
-
-	/**
 	 * @covers ::_make_location
 	 */
 	public function testMakeLocation() {
@@ -94,14 +87,6 @@ class TestGeocoder extends TestCase {
 	}
 
 	/**
-	 * @covers ::_make_request
-	 */
-	public function testMakeRequestInvalidURL() {
-		$response = $this->reflectionMethodInvokeArgs($this->_geocoder, '_make_request', 'foo.bar');
-		$this->assertInstanceOf('WP_Error', $response);
-	}
-
-	/**
 	 * @covers ::_get_value_from_results
 	 * @covers ::_get_state_from_results
 	 */
@@ -125,4 +110,16 @@ class TestGeocoder extends TestCase {
 		));
 	}
 
+	/**
+	 * @covers ::geocode
+	 */
+	public function testGeocodeWithWPErrorResponse() {
+		$http = \Mockery::mock(HTTP::class);
+
+		$http->shouldReceive('make_request')->andReturn(new \WP_Error());
+
+		$geocoder = new Geocoder(array('http' => $http));
+
+		$this->assertInstanceOf(\WP_Error::class, $geocoder->geocode('foo'));
+	}
 }
