@@ -57,7 +57,7 @@ class Marker extends Model_Base {
 	 * Marker_Model constructor.
 	 * @param array $args
 	 */
-	function __construct( $args = array() ) {
+	public function __construct( $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
 			'address'     => '',
@@ -81,7 +81,7 @@ class Marker extends Model_Base {
 	/**
 	 * @return Info_Window
 	 */
-	function info_window() {
+	public function info_window() {
 
 		return $this->_info_window;
 
@@ -90,7 +90,7 @@ class Marker extends Model_Base {
 	/**
 	 * @return Marker_Label
 	 */
-	function label() {
+	public function label() {
 
 		if ( is_string( $this->_label ) ) {
 			$this->_label = new Marker_Label( array( 'text' => $this->_label ) );
@@ -103,7 +103,7 @@ class Marker extends Model_Base {
 	/**
 	 * @return double
 	 */
-	function latitude() {
+	public function latitude() {
 
 		if ( is_null( $this->_latitude ) && ! is_wp_error( $this->location() ) ) {
 			$this->_latitude = $this->location()->latitude();
@@ -114,7 +114,7 @@ class Marker extends Model_Base {
 	/**
 	 * @return Location|\WP_Error
 	 */
-	function location() {
+	public function location() {
 		if ( ! is_object( $this->_location ) ) {
 			$this->_location = $this->_geocoder()->geocode( $this->_address );
 		}
@@ -124,7 +124,7 @@ class Marker extends Model_Base {
 	/**
 	 * @return double
 	 */
-	function longitude() {
+	public function longitude() {
 
 		if ( is_null( $this->_longitude ) && ! is_wp_error( $this->location() ) ) {
 			$this->_longitude = doubleval( $this->location()->longitude() );
@@ -137,7 +137,7 @@ class Marker extends Model_Base {
 	 *
 	 * @return array
 	 */
-	function position() {
+	public function position() {
 
 		return array( 'lat' => $this->latitude(), 'lng' => $this->longitude() );
 
@@ -146,7 +146,7 @@ class Marker extends Model_Base {
 	/**
 	 * @return string
 	 */
-	function title() {
+	public function title() {
 		return $this->_title;
 	}
 
@@ -154,7 +154,7 @@ class Marker extends Model_Base {
 	 * @param  array $args
 	 * @return array
 	 */
-	function marker_args( $args = array() ) {
+	public function marker_args( $args = array() ) {
 
 		$args = array_merge( $args, $this->_extra_args );
 

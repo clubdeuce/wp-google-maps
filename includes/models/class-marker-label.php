@@ -36,7 +36,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @return string
 	 */
-	function color() {
+	public function color() {
 
 		return (string)$this->_color;
 
@@ -45,7 +45,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @return null|string
 	 */
-	function font_family() {
+	public function font_family() {
 
 		return (string)$this->_font_family;
 
@@ -54,7 +54,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @return string
 	 */
-	function font_size() {
+	public function font_size() {
 
 		return (string)$this->_font_size;
 
@@ -63,7 +63,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @return string
 	 */
-	function font_weight() {
+	public function font_weight() {
 
 		return (string)$this->_font_weight;
 
@@ -72,7 +72,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @return null|string
 	 */
-	function text() {
+	public function text() {
 
 		return (string)$this->_text;
 
@@ -81,7 +81,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @param string $color
 	 */
-	function set_color( $color ) {
+	public function set_color( $color ) {
 
 		$this->_color = $color;
 
@@ -90,7 +90,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @param string $font
 	 */
-	function set_font_family( $font ) {
+	public function set_font_family( $font ) {
 
 		$this->_font_family = $font;
 
@@ -99,7 +99,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @param string $size
 	 */
-	function set_font_size( $size ) {
+	public function set_font_size( $size ) {
 
 		$this->_font_size = $size;
 
@@ -108,7 +108,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @param string $weight
 	 */
-	function set_font_weight( $weight ) {
+	public function set_font_weight( $weight ) {
 
 		$this->_font_weight = $weight;
 
@@ -117,7 +117,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @param string $text
 	 */
-	function set_text( $text ) {
+	public function set_text( $text ) {
 
 		$this->_text = $text;
 
@@ -128,7 +128,7 @@ class Marker_Label extends Model_Base {
 	 *
 	 * @todo Is this used? If not, remove it.
 	 */
-	function json_object() {
+	public function json_object() {
 
 		return json_encode( $this->options() );
 
@@ -137,7 +137,7 @@ class Marker_Label extends Model_Base {
 	/**
 	 * @return string|array
 	 */
-	function options() {
+	public function options() {
 
 		$args = [
 			'color'      => $this->color(),

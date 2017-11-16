@@ -45,7 +45,7 @@ class Map extends Model_Base {
 	/**
 	 * @param Marker $marker
 	 */
-	function add_marker( $marker ) {
+	public function add_marker( $marker ) {
 
 		$this->_markers[] = $marker;
 
@@ -54,7 +54,7 @@ class Map extends Model_Base {
 	/**
 	 * @param Marker[] $markers
 	 */
-	function add_markers( $markers ) {
+	public function add_markers( $markers ) {
 
 		$this->_markers = array_merge( $this->_markers, $markers );
 
@@ -63,7 +63,7 @@ class Map extends Model_Base {
 	/**
 	 * @return array
 	 */
-	function center() {
+	public function center() {
 
 		return $this->_center;
 
@@ -72,7 +72,7 @@ class Map extends Model_Base {
 	/**
 	 * @return string
 	 */
-	function height() {
+	public function height() {
 
 		return $this->_height;
 
@@ -81,7 +81,7 @@ class Map extends Model_Base {
 	/**
 	 * @return string
 	 */
-	function html_id() {
+	public function html_id() {
 
 		if ( ! isset( $this->_html_id ) ) {
 			$this->_html_id = sprintf( 'map-%1$s', md5( serialize( array( $this->center(), $this->markers() ) ) ) );
@@ -94,7 +94,7 @@ class Map extends Model_Base {
 	/**
 	 * @return Marker[]
 	 */
-	function markers() {
+	public function markers() {
 
 		return $this->_markers;
 
@@ -103,7 +103,7 @@ class Map extends Model_Base {
 	/**
 	 * @return string
 	 */
-	function width() {
+	public function width() {
 
 		return $this->_width;
 
@@ -112,7 +112,7 @@ class Map extends Model_Base {
 	/**
 	 * @return int
 	 */
-	function zoom() {
+	public function zoom() {
 
 		return $this->_zoom;
 
@@ -121,7 +121,7 @@ class Map extends Model_Base {
 	/**
 	 * @param array $center
 	 */
-	function set_center( $center ) {
+	public function set_center( $center ) {
 
 		$center = wp_parse_args( $center, array(
 			'lat' => null,
@@ -135,7 +135,7 @@ class Map extends Model_Base {
 	/**
 	 * @param int $zoom
 	 */
-	function set_zoom( $zoom ) {
+	public function set_zoom( $zoom ) {
 
 		$this->_zoom = (int)$zoom;
 
@@ -144,7 +144,7 @@ class Map extends Model_Base {
 	/**
 	 * @param string $height
 	 */
-	function set_height( $height ) {
+	public function set_height( $height ) {
 
 		$this->_height = $height;
 
@@ -153,7 +153,7 @@ class Map extends Model_Base {
 	/**
 	 * @param string $id
 	 */
-	function set_html_id( $id ) {
+	public function set_html_id( $id ) {
 
 		$this->_html_id = $id;
 
@@ -164,7 +164,7 @@ class Map extends Model_Base {
 	 *
 	 * @todo Refactor to make_params
 	 */
-	function make_args() {
+	public function make_args() {
 
 		return array(
 			'center' => $this->center(),
