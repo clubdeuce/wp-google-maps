@@ -37,6 +37,8 @@ class testMapView extends TestCase {
 		$this->assertArrayHasKey('title', $item);
 		$this->assertArrayHasKey('label', $item);
 		$this->assertInternalType('array', $item['position']);
+		$this->assertArrayHasKey('lat', $item['position']);
+		$this->assertArrayHasKey('lng', $item['position']);
 		$this->assertInternalType('string', $item['title']);
 		$this->assertInternalType('string', $item['label']);
 	}
