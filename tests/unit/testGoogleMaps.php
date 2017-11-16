@@ -69,6 +69,17 @@ class TestGoogleMaps extends TestCase {
 	}
 
 	/**
+	 * @covers ::make_marker_by_position
+	 */
+	public function testMakeMarkerByPosition() {
+
+		$marker = Google_Maps::make_marker_by_position( 123.45, -123.45);
+
+		$this->assertInstanceOf(Marker::class, $marker);
+
+	}
+
+	/**
 	 * @covers ::driving_directions_href
 	 */
 	public function testDrivingDirectionsHref() {

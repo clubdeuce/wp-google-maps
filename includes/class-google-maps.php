@@ -156,6 +156,26 @@ class Google_Maps {
 	}
 
 	/**
+	 * @param float $lat
+	 * @param float $lng
+	 *
+	 * @return Marker
+	 */
+	public static function make_marker_by_position( $lat, $lng, $args = array() ) {
+
+		$args = wp_parse_args( $args, array(
+			'geocoder' => self::geocoder(),
+		));
+
+		return new Marker( array(
+			'lat' => $lat,
+			'lng' => $lng,
+
+		) );
+
+	}
+
+	/**
 	 * @param  string $destination
 	 * @param  array  $args
 	 * @return string
