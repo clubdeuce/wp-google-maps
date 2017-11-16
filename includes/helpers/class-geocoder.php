@@ -55,7 +55,7 @@ class Geocoder {
 		$response = $this->_http->make_request( $url );
 
 		do {
-			if ( is_wp_error( $response ) ) {
+			if ( is_a( $response, \WP_Error::class ) ) {
 				$location = $response;
 				break;
 			}

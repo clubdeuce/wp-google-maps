@@ -172,7 +172,7 @@ class Marker extends Model_Base {
 	 * @return Geocoder
 	 */
 	protected function _geocoder() {
-		if (! is_a( $this->_geocoder, '\Clubdeuce\WPGoogleMaps\Geocoder' ) ) {
+		if (! is_a( $this->_geocoder, Geocoder::class ) ) {
 			$this->_geocoder = new Geocoder();
 		}
 
