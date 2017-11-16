@@ -51,25 +51,7 @@ class Google_Maps {
 
 		self::$_source_dir = dirname( __DIR__ );
 
-		spl_autoload_register( array ( __CLASS__, 'autoload' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, '_wp_enqueue_scripts_9' ), 9 );
-
-	}
-
-	/**
-	 * @param string $class_name
-	 */
-	static function autoload( $class_name ) {
-
-		$parts = explode( '\\', $class_name );
-		$class = strtolower( str_replace( '_', '-', end ( $parts ) ) );
-
-		foreach( array( 'includes', 'includes/helpers', 'includes/models', 'includes/views' ) as $dir ) {
-			$filename = Google_Maps::source_dir() . "/{$dir}/class-{$class}.php";
-			if ( file_exists( $filename ) ) {
-				require_once $filename;
-			}
-		}
 
 	}
 
@@ -136,7 +118,14 @@ class Google_Maps {
 		wp_register_script('google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}", false, '3.0', true );
 		wp_register_script('map-control', $source, array( 'jquery', 'google-maps' ), self::version(), true );
 
-		$conditions = array_map( array( __CLASS__, '_evaluate_condition' ), static::$_script_conditions );
+		$conditions = self::script_conditions();
+
+		foreach( $conditions as $key => $condition ) {
+
+			if ( is_callable( $condition ) ) {
+				$conditions[ $key] = call_user_func( $condition );
+			}
+		}
 
 		if ( in_array( true, $conditions ) ) {
 			wp_enqueue_script( 'map-control' );
@@ -181,35 +170,6 @@ class Google_Maps {
 	}
 
 	/**
-	 * @param string $path
-	 */
-	static function register_source_dir( $path ) {
-
-		if ( is_dir( $path ) ) {
-			self::$_source_dir = $path;
-		}
-
-	}
-
-	/**
-	 * @return string
-	 */
-	static function source_dir() {
-
-		return self::$_source_dir;
-
-	}
-
-	/**
-	 * @param $url
-	 */
-	static function register_source_url( $url ) {
-
-		self::$_source_url = $url;
-
-	}
-
-	/**
 	 * @return string
 	 */
 	static function source_url() {
@@ -229,22 +189,6 @@ class Google_Maps {
 	static function version() {
 
 		return self::$_version;
-
-	}
-
-	/**
-	 * @param  string|\Closure $callable
-	 * @return bool
-	 */
-	private static function _evaluate_condition( $callable ) {
-
-		$result = false;
-
-		if ( is_callable( $callable ) ) {
-			$result = call_user_func( $callable );
-		}
-
-		return $result;
 
 	}
 
