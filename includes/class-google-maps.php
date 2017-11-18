@@ -165,13 +165,12 @@ class Google_Maps {
 
 		$args = wp_parse_args( $args, array(
 			'geocoder' => self::geocoder(),
-		));
-
-		return new Marker( array(
 			'lat' => $lat,
 			'lng' => $lng,
 
-		) );
+		));
+
+		return new Marker( $args );
 
 	}
 
