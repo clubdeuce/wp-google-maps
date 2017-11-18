@@ -29,9 +29,24 @@ use Clubdeuce\WPGoogleMaps\Marker;
 use Clubdeuce\WPGoogleMaps\Map_View;
 
 Google_Maps::initialize();
+
+// Register the conditions under which to load the necessary javascript
+// You can use WP specific ( e.g. is_single, is_search, etc ) or any 
+// valid callback function or closure.
 Google_Maps::register_script_condition( 'is_single' );
-$map = new Map();
-$map->add_marker( new Marker( array( 'address' => '1600 Amphitheatre Parkway, Mountain View, CA 94043') ) );
-$view = new Map_View( $map );
-$view->the_map();
+
+//Create a new map object
+$map = Google_Maps::make_new_map();
+
+//Create a new marker object
+$marker = Google_Maps::make_marker_by_address( '1600 Pennsylvania Ave NW Washington DC' );
+
+//Set the info window content
+$marker->info_window()->set_content( 'The White House' );
+
+//Add the marker to the map
+$map->add_marker( $marker );
+
+//Render the map
+$map->the_map();
 ```
