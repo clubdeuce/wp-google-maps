@@ -31,13 +31,7 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
     // Add the position of the marker to the bounds object
     bounds.extend(object.position);
 
-    // Add the info box open click listener only if there is info window content
-    if (infoWindows[key].content.trim()) {
-      marker.addListener('click', function () {
-        infoWindow.setContent(infoWindows[key].content);
-        infoWindow.open(map, marker);
-      });
-    }
+    addInfoWindow(map, marker, infoWindows[key], infoWindow);
   });
 
   // Add a listener to enforce a minimum zoom level after the map is resized to fit all markers
@@ -53,6 +47,16 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
 
   // Add the map, markers, and infoWindow objects to a global variable
   gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow};
+}
+
+function addInfoWindow(map, marker, iWindow, infoWindow) {
+  // Add the info box open click listener only if there is info window content
+  if (iWindow.content.trim()) {
+    marker.addListener('click', function () {
+      infoWindow.setContent(iWindow.content);
+      infoWindow.open(map, marker);
+    });
+  }
 }
 
 // Get the browser location using HTML 5 Geolocation
