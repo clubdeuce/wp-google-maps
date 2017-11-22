@@ -27,11 +27,11 @@ class TestGoogleMaps extends TestCase {
 	}
 
 	/**
-	 * @covers ::geocoder
+	 * @covers ::_geocoder
 	 */
 	public function testGeocoder() {
 
-		$this->assertInstanceOf(Geocoder::class, Google_Maps::geocoder());
+		$this->assertInstanceOf(Geocoder::class, $this->reflectionMethodInvoke(Google_Maps::class, '_geocoder'));
 
 	}
 
@@ -46,13 +46,13 @@ class TestGoogleMaps extends TestCase {
 
 	/**
 	 * @covers ::register_script_condition
-	 * @covers ::script_conditions
+	 * @covers ::_script_conditions
 	 */
 	public function testScriptConditions() {
 
 		Google_Maps::register_script_condition('is_search');
 
-		$conditions = Google_Maps::script_conditions();
+		$conditions = $this->reflectionMethodInvoke(Google_Maps::class, '_script_conditions');
 
 		$this->assertInternalType('array', $conditions);
 		$this->assertContains('is_search', $conditions);

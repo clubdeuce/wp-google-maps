@@ -65,19 +65,6 @@ class Google_Maps {
 	}
 
 	/**
-	 * @return Geocoder
-	 */
-	public static function geocoder() {
-
-		if ( ! isset( static::$_geocoder ) ) {
-			static::$_geocoder = new Geocoder( ['api_key' => self::api_key() ] );
-		}
-
-		return static::$_geocoder;
-
-	}
-
-	/**
 	 * @param  array $args
 	 * @return Map
 	 */
@@ -116,12 +103,6 @@ class Google_Maps {
 
 	}
 
-	public static function script_conditions() {
-
-		return static::$_script_conditions;
-
-	}
-
 	/**
 	 * @param  string $address
 	 * @param  array  $args
@@ -131,7 +112,7 @@ class Google_Maps {
 
 		$args = wp_parse_args( $args, array(
 			'address' => $address,
-			'geocoder' => self::geocoder(),
+			'geocoder' => self::_geocoder(),
 		) );
 
 		return new Marker( $args );
@@ -147,7 +128,7 @@ class Google_Maps {
 	public static function make_marker_by_position( $lat, $lng, $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
-			'geocoder' => self::geocoder(),
+			'geocoder' => self::_geocoder(),
 			'lat' => $lat,
 			'lng' => $lng,
 
@@ -197,16 +178,22 @@ class Google_Maps {
 
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function version() {
 
 		return self::$_version;
 
 	}
 
+	/**
+	 * @return bool
+	 */
 	protected static function _evaluate_conditions() {
 
 		$result     = false;
-		$conditions = self::script_conditions();
+		$conditions = self::_script_conditions();
 
 		foreach( $conditions as $key => $condition ) {
 			if ( is_callable( $condition ) ) {
@@ -222,6 +209,9 @@ class Google_Maps {
 
 	}
 
+	/**
+	 *
+	 */
 	protected static function _register_scripts() {
 
 		$key    = static::api_key();
@@ -233,6 +223,28 @@ class Google_Maps {
 
 		wp_register_script('google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}", false, '3.0', true );
 		wp_register_script('map-control', $source, array( 'jquery', 'google-maps' ), self::version(), true );
+
+	}
+
+	/**
+	 * @return array
+	 */
+	protected static function _script_conditions() {
+
+		return static::$_script_conditions;
+
+	}
+
+	/**
+	 * @return Geocoder
+	 */
+	protected static function _geocoder() {
+
+		if ( ! isset( static::$_geocoder ) ) {
+			static::$_geocoder = new Geocoder( ['api_key' => self::api_key() ] );
+		}
+
+		return static::$_geocoder;
 
 	}
 
