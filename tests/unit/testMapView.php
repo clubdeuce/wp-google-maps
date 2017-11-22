@@ -40,7 +40,20 @@ class testMapView extends TestCase {
 		$this->assertArrayHasKey('lat', $item['position']);
 		$this->assertArrayHasKey('lng', $item['position']);
 		$this->assertInternalType('string', $item['title']);
-		$this->assertInternalType('string', $item['label']);
+		$this->assertInternalType('array', $item['label']);
+	}
+
+	/**
+	 * @covers ::_make_label_args
+	 */
+	public function testMakeLabelArgs() {
+		$args = $this->reflectionMethodInvokeArgs($this->_view, '_make_label_args', $this->getMockLabel());
+
+		$this->assertInternalType('array', $args);
+		$this->assertArrayHasKey('fontFamily', $args);
+		$this->assertArrayHasKey('fontSize', $args);
+		$this->assertArrayHasKey('fontWeight', $args);
+		$this->assertArrayHasKey('text', $args);
 	}
 
 	/**

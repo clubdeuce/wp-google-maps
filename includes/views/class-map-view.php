@@ -45,26 +45,37 @@ class Map_View {
 		$marker_args = array();
 
 		foreach ( $this->_model->markers() as $marker ) {
-			$label  = $marker->label();
-			$args = array(
+			$marker_args[] = array(
 				'position'  => $marker->position(),
 				'title'     => $marker->title(),
+				'label'     => self::_make_label_args( $marker->label() ),
 			);
-
-			if ( ! empty( $label->text() ) ) {
-				$args['label'] = json_encode( array(
-					'color'      => $label->color(),
-					'fontFamily' => $label->font_family(),
-					'fontSize'   => $label->font_size(),
-					'fontWeight' => $label->font_weight(),
-					'text'       => $label->text(),
-				) );
-			}
-
-			$marker_args[] = $args;
 		}
 
-		return $marker_args;
+		return array_filter( $marker_args );
+
+	}
+
+	/**
+	 * @param  Marker_Label $label
+	 *
+	 * @return array
+	 */
+	protected function _make_label_args( $label ) {
+
+		$args = array();
+
+		if ( ! empty( $label->text() ) ) {
+			$args = array(
+				'color'      => $label->color(),
+				'fontFamily' => $label->font_family(),
+				'fontSize'   => $label->font_size(),
+				'fontWeight' => $label->font_weight(),
+				'text'       => $label->text(),
+			);
+		}
+
+		return $args;
 
 	}
 
