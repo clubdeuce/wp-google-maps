@@ -7,7 +7,7 @@ use Clubdeuce\WPGoogleMaps\Map_View;
  */
 $model = $this->_model;
 ?>
-<div id="<?php echo $model->html_id(); ?>" class="google-map" style="height: 400px; width: 100%;"></div>
+<div id="<?php echo $model->html_id(); ?>" class="wp-google-map"></div>
 <script type="application/javascript">
 	jQuery(document).ready(function() {
 		generate_map(
