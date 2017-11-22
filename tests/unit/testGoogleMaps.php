@@ -60,6 +60,21 @@ class TestGoogleMaps extends TestCase {
 	}
 
 	/**
+	 * @covers ::_wp_enqueue_scripts_9
+	 * @covers ::_evaluate_conditions
+	 * @covers ::_register_scripts
+	 */
+	public function testScriptsAreEnqueued() {
+
+		Google_Maps::register_script_condition(true);
+		do_action('wp_enqueue_scripts');
+
+		$this->assertTrue(wp_script_is('google-maps',  'enqueued'));
+		$this->assertTrue(wp_script_is('map-control', 'enqueued'));
+
+	}
+
+	/**
 	 * @covers ::make_marker_by_address
 	 */
 	public function testMakeMarkerByAddress() {

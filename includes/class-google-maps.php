@@ -98,7 +98,7 @@ class Google_Maps {
 	}
 
 	/**
-	 * @param callable $condition
+	 * @param callable|bool $condition
 	 */
 	public static function register_script_condition( $condition ) {
 
@@ -108,26 +108,9 @@ class Google_Maps {
 
 	public static function _wp_enqueue_scripts_9() {
 
-		$key    = static::api_key();
-		$source = sprintf( '%1$s/dist/scripts/maps.min.js', self::source_url() );
+		self::_register_scripts();
 
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			$source = sprintf( '%1$s/assets/maps.js', self::source_url() );
-		}
-
-		wp_register_script('google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}", false, '3.0', true );
-		wp_register_script('map-control', $source, array( 'jquery', 'google-maps' ), self::version(), true );
-
-		$conditions = self::script_conditions();
-
-		foreach( $conditions as $key => $condition ) {
-
-			if ( is_callable( $condition ) ) {
-				$conditions[ $key] = call_user_func( $condition );
-			}
-		}
-
-		if ( in_array( true, $conditions ) ) {
+		if ( self::_evaluate_conditions() ) {
 			wp_enqueue_script( 'map-control' );
 		}
 
@@ -217,6 +200,39 @@ class Google_Maps {
 	public static function version() {
 
 		return self::$_version;
+
+	}
+
+	protected static function _evaluate_conditions() {
+
+		$result     = false;
+		$conditions = self::script_conditions();
+
+		foreach( $conditions as $key => $condition ) {
+			if ( is_callable( $condition ) ) {
+				$conditions[ $key ] = call_user_func( $condition );
+			}
+		}
+
+		if ( in_array( true, $conditions ) ) {
+			$result = true;
+		}
+
+		return $result;
+
+	}
+
+	protected static function _register_scripts() {
+
+		$key    = static::api_key();
+		$source = sprintf( '%1$s/dist/scripts/maps.min.js', self::source_url() );
+
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			$source = sprintf( '%1$s/assets/maps.js', self::source_url() );
+		}
+
+		wp_register_script('google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}", false, '3.0', true );
+		wp_register_script('map-control', $source, array( 'jquery', 'google-maps' ), self::version(), true );
 
 	}
 
