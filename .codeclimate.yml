@@ -31,12 +31,10 @@ checks:
     config:
       threshold: # language-specific defaults. an override will affect all languages.
 plugins:
-  phpmd:
-    enabled: true
-    config:
-      file_extensions: "php"
-      rulesets: "unusedcode,codesize,naming"
   duplication:
     enabled: true
+    config:
+      languages:
+        - php
   sonarphp:
     enabled: true
