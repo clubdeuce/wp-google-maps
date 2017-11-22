@@ -151,11 +151,11 @@ class Map extends Model_Base {
 	}
 
 	/**
-	 * @param string $id
+	 * @param string $html_id
 	 */
-	public function set_html_id( $id ) {
+	public function set_html_id( $html_id ) {
 
-		$this->_html_id = $id;
+		$this->_html_id = $html_id;
 
 	}
 
