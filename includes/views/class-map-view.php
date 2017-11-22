@@ -33,13 +33,6 @@ class Map_View {
 			'template' => Google_Maps::source_dir() . '/templates/map-view.php',
 		) );
 
-		$height       = $this->_model->height();
-		$width        = $this->_model->width();
-		$map_id       = $this->_model->html_id();
-		$map_params   = $this->_model->make_args();
-		$markers      = $this->_make_markers_args();
-		$info_windows = $this->_make_info_windows();
-
 		require $args['template'];
 		
 	}

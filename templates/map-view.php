@@ -1,21 +1,20 @@
 <?php
+use Clubdeuce\WPGoogleMaps\Map_View;
 /**
  * The basic map template
  *
- * @var string $map_id
- * @var array  $map_params
- * @var array  $markers
- * @var array  $info_windows
+ * @var Map_View $this
  */
+$model = $this->_model;
 ?>
 <div id="<?php echo $map_id; ?>" class="google-map" style="height: 400px; width: 100%;"></div>
 <script type="application/javascript">
 	jQuery(document).ready(function() {
 		generate_map(
-			"<?php echo esc_js($map_id); ?>",
-			<?php echo json_encode($map_params); ?>,
-			<?php echo json_encode($markers); ?>,
-			<?php echo json_encode($info_windows); ?>
+			"<?php echo esc_js($model->html_id()); ?>",
+			<?php echo json_encode($model->make_args()); ?>,
+			<?php echo json_encode($this->_make_markers_args()); ?>,
+			<?php echo json_encode($this->_make_info_windows()); ?>
 		);
 	});
 </script>
