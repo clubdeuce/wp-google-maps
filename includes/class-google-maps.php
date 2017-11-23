@@ -113,7 +113,7 @@ class Google_Maps {
 
 		$args = wp_parse_args( $args, array(
 			'address' => $address,
-			'geocoder' => self::_geocoder(),
+			'geocoder' => self::geocoder(),
 		) );
 
 		return new Marker( $args );
@@ -129,7 +129,7 @@ class Google_Maps {
 	public static function make_marker_by_position( $lat, $lng, $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
-			'geocoder'  => self::_geocoder(),
+			'geocoder'  => self::geocoder(),
 			'latitude'  => $lat,
 			'longitude' => $lng,
 		));
@@ -188,6 +188,19 @@ class Google_Maps {
 	}
 
 	/**
+	 * @return Geocoder
+	 */
+	public static function geocoder() {
+
+		if ( ! isset( static::$_geocoder ) ) {
+			static::$_geocoder = new Geocoder( ['api_key' => self::api_key() ] );
+		}
+
+		return static::$_geocoder;
+
+	}
+
+	/**
 	 * @return bool
 	 */
 	protected static function _evaluate_conditions() {
@@ -233,19 +246,6 @@ class Google_Maps {
 	protected static function _script_conditions() {
 
 		return static::$_script_conditions;
-
-	}
-
-	/**
-	 * @return Geocoder
-	 */
-	protected static function _geocoder() {
-
-		if ( ! isset( static::$_geocoder ) ) {
-			static::$_geocoder = new Geocoder( ['api_key' => self::api_key() ] );
-		}
-
-		return static::$_geocoder;
 
 	}
 
