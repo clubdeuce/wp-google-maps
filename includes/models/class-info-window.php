@@ -10,6 +10,7 @@ namespace Clubdeuce\WPGoogleMaps;
  * @method int    pixel_offset()
  * @method array  position()
  * @method int    max_width()
+ * @link     https://developers.google.com/maps/documentation/javascript/infowindows
  */
 class Info_Window extends Model_Base {
 

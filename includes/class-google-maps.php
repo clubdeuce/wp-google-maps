@@ -129,10 +129,9 @@ class Google_Maps {
 	public static function make_marker_by_position( $lat, $lng, $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
-			'geocoder' => self::_geocoder(),
-			'lat' => $lat,
-			'lng' => $lng,
-
+			'geocoder'  => self::_geocoder(),
+			'latitude'  => $lat,
+			'longitude' => $lng,
 		));
 
 		return new Marker( $args );

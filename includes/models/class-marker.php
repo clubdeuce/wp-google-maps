@@ -31,7 +31,7 @@ class Marker extends Model_Base {
 	/**
 	 * @var double
 	 */
-	protected $_latitude = null;
+	protected $_latitude;
 
 	/**
 	 * @var double
