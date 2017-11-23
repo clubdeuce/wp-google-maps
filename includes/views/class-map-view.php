@@ -45,14 +45,16 @@ class Map_View {
 		$marker_args = array();
 
 		foreach ( $this->_model->markers() as $marker ) {
-			$marker_args[] = array(
+			$args = array(
 				'position'  => $marker->position(),
 				'title'     => $marker->title(),
 			);
 
 			if ( ! empty( $label = self::_make_label_args( $marker->label() ) ) ) {
-				$marker_args['label'] =  $label;
+				$args['label'] =  $label;
 			}
+
+			$marker_args[] = $args;
 		}
 
 		return array_filter( $marker_args );
