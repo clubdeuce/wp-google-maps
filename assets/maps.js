@@ -31,7 +31,9 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
     // Add the position of the marker to the bounds object
     bounds.extend(object.position);
 
-    addInfoWindow(map, marker, infoWindows[key], infoWindow);
+    if (infoWindows && key in infoWindows) {
+      addInfoWindow(map, marker, infoWindows[key], infoWindow);
+    }
   });
 
   // Add a listener to enforce a minimum zoom level after the map is resized to fit all markers
