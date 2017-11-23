@@ -31,7 +31,7 @@ class TestGoogleMaps extends TestCase {
 	 */
 	public function testGeocoder() {
 
-		$this->assertInstanceOf(Geocoder::class, $this->reflectionMethodInvoke(Google_Maps::class, '_geocoder'));
+		$this->assertInstanceOf(Geocoder::class, Google_Maps::geocoder());
 
 	}
 
