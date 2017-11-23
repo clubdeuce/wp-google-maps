@@ -44,6 +44,8 @@ class Marker extends Model_Base {
 	protected $_location;
 
 	/**
+	 * This appears as a tooltip for the marker.
+	 *
 	 * @var string
 	 */
 	protected $_title;
@@ -115,10 +117,13 @@ class Marker extends Model_Base {
 	 * @return Location|\WP_Error
 	 */
 	public function location() {
+
 		if ( ! is_object( $this->_location ) ) {
 			$this->_location = $this->_geocoder()->geocode( $this->_address );
 		}
+
 		return $this->_location;
+
 	}
 
 	/**
@@ -129,6 +134,7 @@ class Marker extends Model_Base {
 		if ( is_null( $this->_longitude ) && ! is_wp_error( $this->location() ) ) {
 			$this->_longitude = doubleval( $this->location()->longitude() );
 		}
+
 		return doubleval( $this->_longitude );
 	}
 
@@ -147,7 +153,9 @@ class Marker extends Model_Base {
 	 * @return string
 	 */
 	public function title() {
+
 		return $this->_title;
+
 	}
 
 	/**
@@ -172,11 +180,13 @@ class Marker extends Model_Base {
 	 * @return Geocoder
 	 */
 	protected function _geocoder() {
+
 		if (! is_a( $this->_geocoder, Geocoder::class ) ) {
 			$this->_geocoder = new Geocoder();
 		}
 
 		return $this->_geocoder;
+
 	}
 
 }
