@@ -48,8 +48,11 @@ class Map_View {
 			$marker_args[] = array(
 				'position'  => $marker->position(),
 				'title'     => $marker->title(),
-				'label'     => self::_make_label_args( $marker->label() ),
 			);
+
+			if ( ! empty( $label = self::_make_label_args( $marker->label() ) ) ) {
+				$marker_args['label'] =  $label;
+			}
 		}
 
 		return array_filter( $marker_args );
