@@ -26,23 +26,25 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
     markers.push(marker);
 
     // Add the position of the marker to the bounds object
-   // bounds.extend(object.position);
+    bounds.extend(object.position);
 
     if (infoWindows && key in infoWindows) {
       addInfoWindow(map, marker, infoWindows[key], infoWindow);
     }
   });
 
-  // Add a listener to enforce a minimum zoom level after the map is resized to fit all markers
-  // google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
-  //   if (this.getZoom() > 15) {
-  //     this.setZoom(15);
-  //   }
-  // });
-
   // Automatically ensure all markers fit on the map
   // see https://wrightshq.com/playground/placing-multiple-markers-on-a-google-map-using-api-3/
-  //map.fitBounds(bounds);
+  if( 1 < count(markers) ) {
+    //Add a listener to enforce a minimum zoom level after the map is resized to fit all markers
+    google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
+      if (this.getZoom() > 15) {
+        this.setZoom(15);
+      }
+    });
+    
+    map.fitBounds(bounds);
+  }
 
   // Add the map, markers, and infoWindow objects to a global variable
   gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow};
