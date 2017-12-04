@@ -5,7 +5,8 @@ namespace Clubdeuce\WPGoogleMaps;
 /**
  * Class Map
  * @package Clubdeuce\WPGoogleMaps
- * @method array       styles()
+ *
+ * @method array styles()
  */
 class Map_Model extends Model_Base {
 

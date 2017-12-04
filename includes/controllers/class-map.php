@@ -9,6 +9,13 @@ namespace Clubdeuce\WPGoogleMaps;
  * @property Map_Model $_model
  * @property Map_View  $_view
  *
+ * @method array center()
+ * @method array Marker[]
+ * @method array styles()
+ * @method void  the_map()
+ * @method void  the_map_params()
+ * @method int   zoom()
+ *
  * @mixin    Map_Model
  * @mixin    Map_View
  */
