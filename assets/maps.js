@@ -35,7 +35,7 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
 
   // Automatically ensure all markers fit on the map
   // see https://wrightshq.com/playground/placing-multiple-markers-on-a-google-map-using-api-3/
-  if( 1 < count(markers) ) {
+  if( 1 < jQuery(markers).length ) {
     //Add a listener to enforce a minimum zoom level after the map is resized to fit all markers
     google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
       if (this.getZoom() > 15) {

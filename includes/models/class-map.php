@@ -77,7 +77,28 @@ class Map_Model extends Model_Base {
 	 */
 	public function center() {
 
-		return $this->_center;
+		$value = null;
+
+		do {
+			if ( isset( $this->_center ) ) {
+				$value = $this->_center;
+				break;
+			}
+
+			if ( 0 == count( $this->markers() ) ) {
+				break;
+			}
+
+			$marker = $this->markers()[0];
+
+			if ( $marker instanceof Marker ) {
+
+				$value = $marker->position();
+
+			}
+		} while ( false );
+
+		return $value;
 
 	}
 
