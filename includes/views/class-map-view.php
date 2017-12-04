@@ -9,7 +9,7 @@ namespace Clubdeuce\WPGoogleMaps;
 class Map_View {
 
 	/**
-	 * @var Map
+	 * @var Map_Model
 	 */
 	protected $_model;
 

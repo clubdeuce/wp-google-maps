@@ -3,6 +3,7 @@
 namespace Clubdeuce\WPGoogleMaps\Tests\Integration;
 
 use Clubdeuce\WPGoogleMaps\Map;
+use Clubdeuce\WPGoogleMaps\Map_Model;
 use Clubdeuce\WPGoogleMaps\Marker;
 use Clubdeuce\WPGoogleMaps\Tests\TestCase;
 
@@ -70,7 +71,8 @@ class TestMap extends TestCase {
 
 	/**
 	 * @covers ::__construct
-	 * @covers ::__call
+	 * @covers \Clubdeuce\WPGoogleMaps\Controller_Base::__call
+	 * @covers \Clubdeuce\WPGoogleMaps\Model_Base::__call
 	 */
 	public function testStyle() {
 		$style = $this->_map->styles();
@@ -81,6 +83,8 @@ class TestMap extends TestCase {
 	}
 
 	/**
+	 * @covers ::__construct
+	 * @covers \Clubdeuce\WPGoogleMaps\Controller_Base::__call
 	 * @covers \Clubdeuce\WPGoogleMaps\Map_View::the_map_params
 	 * @covers \Clubdeuce\WPGoogleMaps\Map_View::_map_params
 	 */
