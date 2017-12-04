@@ -27,7 +27,7 @@ class TestGoogleMaps extends TestCase {
 	}
 
 	/**
-	 * @covers ::_geocoder
+	 * @covers ::geocoder
 	 */
 	public function testGeocoder() {
 

@@ -5,8 +5,14 @@ namespace Clubdeuce\WPGoogleMaps;
 /**
  * Class Map
  * @package Clubdeuce\WPGoogleMaps
+ * @method array       styles()
  */
-class Map extends Model_Base {
+class Map_Model extends Model_Base {
+
+	/**
+	 * @var null|string
+	 */
+	protected $_background_color = null;
 
 	/**
 	 * @var array
@@ -30,6 +36,11 @@ class Map extends Model_Base {
 	 * @var Marker[]
 	 */
 	protected $_markers = array();
+
+	/**
+	 * @var array
+	 */
+	protected $_styles = array();
 
 	/**
 	 * The Map element width (default: 100%).
@@ -160,6 +171,26 @@ class Map extends Model_Base {
 	}
 
 	/**
+	 * @param array|string $styles
+	 */
+	public function set_styles( $styles ) {
+
+		do {
+			if ( is_string( $styles ) ) {
+				$styles = json_decode( $styles, true );
+			}
+
+			if ( ! is_array( $styles ) ) {
+				trigger_error( __( 'The style property must be an array' ) );
+				break;
+			}
+
+			$this->_styles = $styles;
+		} while ( false );
+
+	}
+
+	/**
 	 * @return array
 	 *
 	 * @todo Refactor to make_params
@@ -167,8 +198,9 @@ class Map extends Model_Base {
 	public function make_args() {
 
 		return array(
-			'center' => $this->center(),
-			'zoom'   => (int)$this->zoom(),
+			'center'          => $this->center(),
+			'styles'          => $this->styles(),
+			'zoom'            => (int)$this->zoom(),
 		);
 
 	}

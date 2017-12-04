@@ -21,7 +21,12 @@ class TestMap extends TestCase {
 	private $_map;
 
 	public function setUp() {
-		$this->_map = new Map(array('center' => array('lat' => 100, 'lng' => -100), 'zoom' => 12));
+		$this->_map = new Map(array(
+			'center'  => array('lat' => 100, 'lng' => -100),
+			'html_id' => 'foo-id',
+			'styles'  => array('foo' => 'bar'),
+			'zoom'    => 12
+		));
 
 		$this->_map->add_marker(new Marker(array(
 			'address'  => '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
@@ -32,14 +37,14 @@ class TestMap extends TestCase {
 	}
 
 	/**
-	 * @covers ::center
+	 * @covers ::__call
 	 */
 	public function testCenter() {
 		$this->assertEquals(array('lat' => 100, 'lng' => -100), $this->_map->center());
 	}
 
 	/**
-	 * @covers ::zoom
+	 * @covers ::__call
 	 */
 	public function testZoom() {
 		$this->assertEquals(12, $this->_map->zoom());
@@ -63,4 +68,33 @@ class TestMap extends TestCase {
 		$this->assertInternalType('array', $marker->marker_args());
 	}
 
+	/**
+	 * @covers ::__construct
+	 * @covers ::__call
+	 */
+	public function testStyle() {
+		$style = $this->_map->styles();
+
+		$this->assertInternalType('array', $style);
+		$this->assertArrayHasKey('foo', $style);
+		$this->assertEquals('bar', $style['foo']);
+	}
+
+	/**
+	 * @covers \Clubdeuce\WPGoogleMaps\Map_View::the_map_params
+	 * @covers \Clubdeuce\WPGoogleMaps\Map_View::_map_params
+	 */
+	public function testMapParams() {
+		ob_start();
+		$this->_map->the_map_params();
+
+		$params = ob_get_clean();
+
+		$this->assertInternalType('string', $params);
+
+		$params = json_decode($params, true);
+		$this->assertInternalType('array', $params);
+		$this->assertArrayHasKey('center', $params);
+		$this->assertArrayHasKey('zoom', $params);
+	}
 }

@@ -15,10 +15,7 @@ jQuery(document).ready(function ($) {
  * @param infoWindows
  */
 function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
-  var map = new google.maps.Map(document.getElementById(mapId), {
-    center: mapParams.center,
-    zoom: Number(mapParams.zoom)
-  });
+  var map = new google.maps.Map(document.getElementById(mapId), mapParams);
   var markers = [];
   var bounds = new google.maps.LatLngBounds();
   var infoWindow = new google.maps.InfoWindow();
@@ -29,7 +26,7 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
     markers.push(marker);
 
     // Add the position of the marker to the bounds object
-    bounds.extend(object.position);
+   // bounds.extend(object.position);
 
     if (infoWindows && key in infoWindows) {
       addInfoWindow(map, marker, infoWindows[key], infoWindow);
@@ -37,15 +34,15 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
   });
 
   // Add a listener to enforce a minimum zoom level after the map is resized to fit all markers
-  google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
-    if (this.getZoom() > 15) {
-      this.setZoom(15);
-    }
-  });
+  // google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
+  //   if (this.getZoom() > 15) {
+  //     this.setZoom(15);
+  //   }
+  // });
 
   // Automatically ensure all markers fit on the map
   // see https://wrightshq.com/playground/placing-multiple-markers-on-a-google-map-using-api-3/
-  map.fitBounds(bounds);
+  //map.fitBounds(bounds);
 
   // Add the map, markers, and infoWindow objects to a global variable
   gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow};

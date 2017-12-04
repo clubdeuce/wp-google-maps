@@ -2,13 +2,13 @@
 
 namespace Clubdeuce\WPGoogleMaps\Tests\UnitTests;
 
-use Clubdeuce\WPGoogleMaps\Map;
+use Clubdeuce\WPGoogleMaps\Map_Model;
 use Clubdeuce\WPGoogleMaps\Tests\TestCase;
 
 /**
  * Class testMap
  * @package Clubdeuce\WPGoogleMaps\Tests\UnitTests
- * @coversDefaultClass Clubdeuce\WPGoogleMaps\Map
+ * @coversDefaultClass Clubdeuce\WPGoogleMaps\Map_Model
  * @group Map
  */
 class testMapModel extends TestCase {
@@ -19,13 +19,18 @@ class testMapModel extends TestCase {
 	private $_center = array( 'lat' => 100.23435532, 'lng' => -100.1234642345325 );
 
 	/**
-	 * @var Map
+	 * @var Map_Model
 	 */
 	private $_model;
 
 	public function setUp() {
 
-		$this->_model = new Map(array('center' => $this->_center, 'markers' => array('foo', 'bar', 'baz'), 'zoom' => 12));
+		$this->_model = new Map_Model(array(
+			'center'  => $this->_center,
+			'markers' => array('foo', 'bar', 'baz'),
+			'style'   => array('foo' => 'bar'),
+			'zoom'    => 12
+		));
 
 	}
 

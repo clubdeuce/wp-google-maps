@@ -165,11 +165,15 @@ class TestCase extends \WP_UnitTestCase {
 
 		$model = \Mockery::mock('\Clubdeuce\WPGoogleMaps\Map');
 
-		$model->shouldReceive('markers')->andReturn(array($this->getMockMarker()));
+		$model->shouldReceive('center')->andReturn(array('lat' => 100, 'lng' => -100));
 		$model->shouldReceive('height')->andReturn(400);
 		$model->shouldReceive('width')->andReturn('100%');
 		$model->shouldReceive('html_id')->andReturn('map-foo');
+		$model->shouldReceive('markers')->andReturn(array($this->getMockMarker()));
+		$model->shouldReceive('styles')->andReturn(array('foo' => 'bar'));
+		$model->shouldReceive('width')->andReturn('100%');
 		$model->shouldReceive('make_args')->andReturn(array('center' => array('lat' => 100, 'lng' => -100), 'zoom' => 5));
+		$model->shouldReceive('zoom')->andReturn('5');
 		return $model;
 	}
 }

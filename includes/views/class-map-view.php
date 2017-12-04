@@ -16,7 +16,7 @@ class Map_View {
 	/**
 	 * Map_View constructor.
 	 *
-	 * @param Map $model
+	 * @param Map_Model $model
 	 */
 	public function __construct( $model ) {
 		
@@ -36,7 +36,29 @@ class Map_View {
 		require $args['template'];
 		
 	}
-	
+
+	public function the_map_params() {
+
+		echo json_encode( $this->_map_params() );
+
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function _map_params() {
+
+		$model  = $this->_model;
+		$params = array(
+			'center'                   => $model->center(),
+			'styles'                   => $model->styles(),
+			'zoom'                     => $model->zoom(),
+		);
+
+		return array_filter( $params );
+
+	}
+
 	/**
 	 * @return array
 	 */

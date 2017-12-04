@@ -12,7 +12,7 @@ $model = $this->_model;
 	jQuery(document).ready(function() {
 		generate_map(
 			"<?php echo esc_js($model->html_id()); ?>",
-			<?php echo json_encode($model->make_args()); ?>,
+			<?php $this->the_map_params(); ?>,
 			<?php echo json_encode($this->_make_markers_args()); ?>,
 			<?php echo json_encode($this->_make_info_windows()); ?>
 		);

@@ -87,4 +87,16 @@ class testMapView extends TestCase {
 		$this->assertRegExp('#class="wp-google-map"#', $output);
 	}
 
+	/**
+	 * @covers ::_map_params
+	 */
+	public function testMapParams() {
+
+		$params = $this->reflectionMethodInvoke($this->_view, '_map_params');
+
+		$this->assertInternalType('array', $params);
+
+		$this->assertArrayHasKey('center', $params);
+		$this->assertArrayHasKey('zoom', $params);
+	}
 }
