@@ -32,6 +32,7 @@ class TestMarkerModel extends TestCase {
 			'info_window' => $this->getMockInfoWindow(),
 			'title'    => 'Sample Title',
 			'label'    => '12',
+			'opacity'  => 0.5,
 		]);
 	}
 
@@ -105,6 +106,7 @@ class TestMarkerModel extends TestCase {
 
 	/**
 	 * @covers ::marker_args
+	 * @covers \Clubdeuce\WPGoogleMaps\Model_Base::__call
 	 */
 	public function testMarkerArgs() {
 
@@ -116,6 +118,8 @@ class TestMarkerModel extends TestCase {
 		$this->assertArrayHasKey('title', $args);
 		$this->assertEquals($this->_position, $args['position']);
 		$this->assertEquals('Sample Title', $args['title']);
+		$this->assertArrayHasKey('opacity', $args);
+		$this->assertEquals(0.5, $args['opacity']);
 		$this->assertArrayNotHasKey('icon', $args);
 	}
 

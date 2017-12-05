@@ -51,6 +51,7 @@ class Map_View {
 		$model  = $this->_model;
 		$params = array(
 			'center'                   => $model->center(),
+			'height'                   => $model->height(),
 			'styles'                   => $model->styles(),
 			'zoom'                     => $model->zoom(),
 		);
@@ -67,20 +68,31 @@ class Map_View {
 		$marker_args = array();
 
 		foreach ( $this->_model->markers() as $marker ) {
-			$args = array(
-				'icon'      => $marker->icon(),
-				'position'  => $marker->position(),
-				'title'     => $marker->title(),
-			);
-
-			if ( ! empty( $label = self::_make_label_args( $marker->label() ) ) ) {
-				$args['label'] =  $label;
-			}
-
-			$marker_args[] = $args;
+			$marker_args[] = self::_make_marker_args( $marker );
 		}
 
 		return array_filter( $marker_args );
+
+	}
+
+	/**
+	 * @param  Marker $marker
+	 *
+	 * @return array
+	 */
+	protected function _make_marker_args( $marker ) {
+
+		$args = array();
+
+		foreach ( $marker->marker_args() as $key => $value ) {
+			$args[ self::_camel_case( $key ) ] = $value;
+		}
+
+		if ( ! empty( $label = self::_make_label_args( $marker->label() ) ) ) {
+			$args['label'] =  $label;
+		}
+
+		return $args;
 
 	}
 
@@ -130,5 +142,19 @@ class Map_View {
 		return $windows;
 
 	}
-	
+
+	protected function _camel_case( $text, $delimiter = '_' ) {
+
+		$parts = explode( $delimiter, $text );
+
+		if ( count( $parts ) ) {
+			$text = '';
+			foreach( $parts as $key => $value ) {
+				$text .= 0 < $key ? ucfirst( $value ) : $value;
+			}
+		}
+
+		return $text;
+
+	}
 }

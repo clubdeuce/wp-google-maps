@@ -155,6 +155,13 @@ class TestCase extends \WP_UnitTestCase {
 		$marker->shouldReceive('title')->andReturn('Sample Title');
 		$marker->shouldReceive('info_window')->andReturn($this->getMockInfoWindow());
 		$marker->shouldReceive('icon')->andReturn(array('url' => 'http://foo.com/bar.png'));
+		$marker->shouldReceive('marker_args')->andReturn(array(
+			'label'       => $this->getMockLabel(),
+			'info_window' => $this->getMockInfoWindow(),
+			'title'       => 'Sample Title',
+			'position'    => array('lat' => 100, 'lng' => -100),
+			'opacity'     => 1.0,
+		));
 
 		return $marker;
 	}

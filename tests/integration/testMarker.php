@@ -21,7 +21,11 @@ class testMarker extends TestCase {
 	protected $_marker;
 
 	public function setUp() {
-		$this->_marker = new Marker(array('address' => '1600 Ampitheatre Parkway '));
+		$this->_marker = new Marker(array(
+			'address' => '1600 Ampitheatre Parkway',
+			'title'   => 'Headquarters',
+			'opacity' => 1.0,
+		));
 	}
 
 	/**
@@ -49,6 +53,28 @@ class testMarker extends TestCase {
 		$this->assertInternalType('string', $label->font_size());
 		$this->assertInternalType('string', $label->font_weight());
 		$this->assertInternalType('string', $label->text());
+	}
+
+	/**
+	 * @covers ::marker_args
+	 */
+	public function testMarkerArgs() {
+		$args = $this->_marker->marker_args();
+
+		$this->assertInternalType('array', $args);
+		$this->assertArrayHasKey('opacity', $args );
+		$this->assertArrayHasKey('position', $args );
+		$this->assertArrayHasKey('title', $args);
+		$this->assertEquals(1.0, $args['opacity']);
+		$this->assertEquals('Headquarters', $args['title']);
+	}
+
+	/**
+	 * @covers \Clubdeuce\WPGoogleMaps\Model_Base::__call
+	 */
+	public function testMagicMethods() {
+		$this->assertEquals(1.0, $this->_marker->opacity());
+		$this->assertEquals('Headquarters', $this->_marker->title());
 	}
 
 }

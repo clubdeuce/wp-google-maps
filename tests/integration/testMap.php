@@ -30,8 +30,9 @@ class TestMap extends TestCase {
 		));
 
 		$this->_map->add_marker(new Marker(array(
-			'address'  => '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
-			'title'    => 'Sample Location'
+			'address'       => '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
+			'title'         => 'Sample Location',
+			'opacity'       => 0.5,
 		)));
 
 		parent::setUp();
@@ -53,6 +54,7 @@ class TestMap extends TestCase {
 
 	/**
 	 * @covers \Clubdeuce\WPGoogleMaps\Marker::location
+	 * @covers \Clubdeuce\WPGoogleMaps\Marker::marker_args
 	 */
 	public function testMarkers() {
 		$markers = $this->_map->markers();
@@ -66,7 +68,10 @@ class TestMap extends TestCase {
 		$this->assertInternalType('double', $marker->longitude());
 		$this->assertInternalType('string', $marker->title());
 		$this->assertInstanceOf('\Clubdeuce\WPGoogleMaps\Info_Window', $marker->info_window());
-		$this->assertInternalType('array', $marker->marker_args());
+		$this->assertInternalType('array', $args = $marker->marker_args());
+		$this->assertArrayHasKey('title', $args);
+		$this->assertArrayHasKey('opacity', $args);
+
 	}
 
 	/**

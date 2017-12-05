@@ -6,12 +6,20 @@ namespace Clubdeuce\WPGoogleMaps;
  * Class Marker
  * @package Clubdeuce\WPGoogleMaps
  *
+ * @link   https://developers.google.com/maps/documentation/javascript/reference#Marker
+ *
  * @method string      address()
+ * @method bool        clickable()
+ * @method bool        cross_on_drag()
+ * @method string      cursor()
+ * @method bool        draggable()
  * @method array       extra_args()
  * @method Geocoder    geocoder()
  * @method array       icon()
  * @method Info_Window info_window()
  * @method string      title()
+ * @method bool        visible()
+ * @method int         z_index()
  */
 class Marker extends Model_Base {
 
@@ -175,7 +183,7 @@ class Marker extends Model_Base {
 	 */
 	public function marker_args( $args = array() ) {
 
-		$args = array_merge( $args, $this->_extra_args );
+		$args = array_merge( $args, $this->extra_args() );
 
 		$args = wp_parse_args( $args, array(
 			'position'  => $this->position(),
@@ -185,6 +193,20 @@ class Marker extends Model_Base {
 		) );
 
 		return array_filter( $args );
+
+	}
+
+	public function set( $property, $value ) {
+
+		do {
+			if ( property_exists( __CLASS__, "_{$property}" ) ) {
+				$property = "_{$property}";
+				$this->{$property} = $value;
+				break;
+			}
+
+			$this->_extra_args[ $property ] = $value;
+		} while ( false );
 
 	}
 

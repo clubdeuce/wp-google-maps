@@ -5,6 +5,8 @@ namespace Clubdeuce\WPGoogleMaps;
 /**
  * Class Model_Base
  * @package Clubdeuce\WPGoogleMaps
+ *
+ * @method array extra_args()
  */
 class Model_Base {
 
@@ -22,12 +24,17 @@ class Model_Base {
 
 		$args = wp_parse_args( $args );
 
-		foreach ( $args as $key => $arg ) {
+		foreach ( $args as $key => $value ) {
 
-			if ( property_exists( $this, "_{$key}" ) ) {
-				$property = "_{$key}";
-				$this->{$property} = $arg;
-			}
+			do {
+				if ( property_exists( $this, "_{$key}" ) ) {
+					$property = "_{$key}";
+					$this->{$property} = $value;
+					break;
+				}
+
+				$this->_extra_args[ $key ] = $value;
+			} while ( false );
 
 		}
 
@@ -43,10 +50,18 @@ class Model_Base {
 
 		$value = null;
 
-		if ( property_exists( $this, "_{$method_name}" ) ) {
-			$property = "_{$method_name}";
-			$value    = $this->{$property};
-		}
+		do {
+			if ( property_exists( $this, "_{$method_name}" ) ) {
+				$property = "_{$method_name}";
+				$value    = $this->{$property};
+				break;
+			}
+
+			if ( isset( $this->extra_args()[ $method_name ] ) ) {
+				$value = $this->extra_args()[ $method_name ];
+				break;
+			}
+		} while ( false );
 
 		return $value;
 

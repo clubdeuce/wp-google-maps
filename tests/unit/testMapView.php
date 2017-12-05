@@ -25,6 +25,7 @@ class testMapView extends TestCase {
 
 	/**
 	 * @covers ::_make_markers_args
+	 * @covers ::_make_marker_args
 	 * @covers ::__construct
 	 */
 	public function testMakeMarkersArgs() {
@@ -33,9 +34,8 @@ class testMapView extends TestCase {
 		$this->assertInternalType('array', $args);
 
 		$item = $args[0];
-		$this->assertArrayHasKey('icon', $item);
-		$this->assertInternalType('array', $item['icon']);
-		$this->assertArrayHasKey('url', $item['icon']);
+		$this->assertArrayHasKey('opacity', $item);
+		$this->assertEquals(1.0, $item['opacity']);
 		$this->assertArrayHasKey('position', $item);
 		$this->assertArrayHasKey('title', $item);
 		$this->assertArrayHasKey('label', $item);
@@ -101,5 +101,14 @@ class testMapView extends TestCase {
 
 		$this->assertArrayHasKey('center', $params);
 		$this->assertArrayHasKey('zoom', $params);
+	}
+
+	/**
+	 * @covers ::_camel_case
+	 */
+	public function testCamelCase() {
+
+		$this->assertEquals('fooBarBaz', $this->reflectionMethodInvokeArgs( $this->_view, '_camel_case', 'foo_bar_baz'));
+
 	}
 }
