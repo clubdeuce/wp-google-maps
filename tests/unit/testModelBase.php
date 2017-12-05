@@ -24,6 +24,7 @@ class TestModelBase extends TestCase {
 
 	/**
 	 * @covers ::__construct
+	 * @covers ::set
 	 */
 	public function testExtraArgsAreSet() {
 		$this->assertEquals('bar', $this->_model->extra_args()['foo']);
@@ -37,9 +38,19 @@ class TestModelBase extends TestCase {
 
 	/**
 	 * @covers ::__call
+	 * @covers ::set
 	 */
 	public function testCallForExtraArgs() {
 		$this->assertEquals('bar', $this->_model->foo());
 	}
 
+	/**
+	 * @covers ::__call
+	 * @covers ::set
+	 */
+	public function testSetWhenPropertyExists() {
+		$model = new Model_Base(array('extra_args' => array('foo' => 'bar')));
+
+		$this->assertEquals(array('foo' => 'bar'), $model->extra_args());
+	}
 }
