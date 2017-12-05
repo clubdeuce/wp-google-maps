@@ -196,20 +196,6 @@ class Marker extends Model_Base {
 
 	}
 
-	public function set( $property, $value ) {
-
-		do {
-			if ( property_exists( __CLASS__, "_{$property}" ) ) {
-				$property = "_{$property}";
-				$this->{$property} = $value;
-				break;
-			}
-
-			$this->_extra_args[ $property ] = $value;
-		} while ( false );
-
-	}
-
 	/**
 	 * @return Geocoder
 	 */

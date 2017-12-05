@@ -26,17 +26,27 @@ class Model_Base {
 
 		foreach ( $args as $key => $value ) {
 
-			do {
-				if ( property_exists( $this, "_{$key}" ) ) {
-					$property = "_{$key}";
-					$this->{$property} = $value;
-					break;
-				}
-
-				$this->_extra_args[ $key ] = $value;
-			} while ( false );
+			$this->set( $key, $value );
 
 		}
+
+	}
+
+	/**
+	 * @param string $property
+	 * @param mixed  $value
+	 */
+	public function set( $property, $value ) {
+
+		do {
+			if ( property_exists( get_called_class(), "_{$property}" ) ) {
+				$property = "_{$property}";
+				$this->{$property} = $value;
+				break;
+			}
+
+			$this->_extra_args[ $property ] = $value;
+		} while ( false );
 
 	}
 
