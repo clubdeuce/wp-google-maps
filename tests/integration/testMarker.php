@@ -26,7 +26,7 @@ class testMarker extends TestCase {
 
 	/**
 	 * @covers ::__construct
-	 * @covers ::info_window
+	 * @covers \Clubdeuce\WPGoogleMaps\Model_Base::__call
 	 */
 	public function testInfoWindow() {
 		$window = $this->_marker->info_window();

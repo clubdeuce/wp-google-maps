@@ -5,6 +5,13 @@ namespace Clubdeuce\WPGoogleMaps;
 /**
  * Class Marker
  * @package Clubdeuce\WPGoogleMaps
+ *
+ * @method string      address()
+ * @method array       extra_args()
+ * @method Geocoder    geocoder()
+ * @method array       icon()
+ * @method Info_Window info_window()
+ * @method string      title()
  */
 class Marker extends Model_Base {
 
@@ -87,24 +94,6 @@ class Marker extends Model_Base {
 	}
 
 	/**
-	 * @return array
-	 */
-	public function icon() {
-
-		return $this->_icon;
-
-	}
-
-	/**
-	 * @return Info_Window
-	 */
-	public function info_window() {
-
-		return $this->_info_window;
-
-	}
-
-	/**
 	 * @return Marker_Label
 	 */
 	public function label() {
@@ -161,15 +150,6 @@ class Marker extends Model_Base {
 	public function position() {
 
 		return array( 'lat' => $this->latitude(), 'lng' => $this->longitude() );
-
-	}
-
-	/**
-	 * @return string
-	 */
-	public function title() {
-
-		return $this->_title;
 
 	}
 

@@ -72,7 +72,7 @@ class TestMarkerModel extends TestCase {
 	}
 
 	/**
-	 * @covers ::title
+	 * @covers \Clubdeuce\WPGoogleMaps\Model_Base::__call
 	 */
 	public function testTitle() {
 		$this->assertEquals('Sample Title', $this->_model->title());
@@ -96,7 +96,7 @@ class TestMarkerModel extends TestCase {
 	}
 
 	/**
-	 * @covers ::info_window
+	 * @covers \Clubdeuce\WPGoogleMaps\Model_Base::__call
 	 */
 	public function testInfoWindow() {
 
@@ -121,7 +121,7 @@ class TestMarkerModel extends TestCase {
 
 	/**
 	 * @covers ::set_icon
-	 * @covers ::icon
+	 * @covers \Clubdeuce\WPGoogleMaps\Model_Base::__call
 	 */
 	public function testSetIcon() {
 
