@@ -68,7 +68,7 @@ class Map_View {
 		$marker_args = array();
 
 		foreach ( $this->_model->markers() as $marker ) {
-			$marker_args[] = self::_make_marker_args( $marker );
+			$marker_args[] = $this->_make_marker_args( $marker );
 		}
 
 		return array_filter( $marker_args );
@@ -88,7 +88,7 @@ class Map_View {
 			$args[ self::_camel_case( $key ) ] = $value;
 		}
 
-		if ( ! empty( $label = self::_make_label_args( $marker->label() ) ) ) {
+		if ( ! empty( $label = $this->_make_label_args( $marker->label() ) ) ) {
 			$args['label'] =  $label;
 		}
 
