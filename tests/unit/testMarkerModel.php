@@ -22,7 +22,7 @@ class TestMarkerModel extends TestCase {
 	/**
 	 * @var array
 	 */
-	private $_position = array( 'lat' => 37.4224764, 'lng' => -122.0842499);
+	private $_position = array('lat' => 37.4224764, 'lng' => -122.0842499);
 
 	public function setUp() {
 
@@ -116,6 +116,22 @@ class TestMarkerModel extends TestCase {
 		$this->assertArrayHasKey('title', $args);
 		$this->assertEquals($this->_position, $args['position']);
 		$this->assertEquals('Sample Title', $args['title']);
+		$this->assertArrayNotHasKey('icon', $args);
+	}
+
+	/**
+	 * @covers ::set_icon
+	 * @covers ::icon
+	 */
+	public function testSetIcon() {
+
+		$this->_model->set_icon('http://example.com/foo.png');
+
+		$this->assertInternalType('array', $icon = $this->_model->icon() );
+		$this->assertArrayHasKey('url', $icon);
+		$this->assertInternalType('string', $icon['url']);
+		$this->assertEquals('http://example.com/foo.png', $icon['url']);
+
 	}
 
 }

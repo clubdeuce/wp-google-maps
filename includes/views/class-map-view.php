@@ -68,6 +68,7 @@ class Map_View {
 
 		foreach ( $this->_model->markers() as $marker ) {
 			$args = array(
+				'icon'      => $marker->icon(),
 				'position'  => $marker->position(),
 				'title'     => $marker->title(),
 			);

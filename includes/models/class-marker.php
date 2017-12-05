@@ -19,6 +19,11 @@ class Marker extends Model_Base {
 	protected $_geocoder;
 
 	/**
+	 * @var array
+	 */
+	protected $_icon;
+
+	/**
 	 * @var Info_Window
 	 */
 	protected $_info_window;
@@ -63,6 +68,7 @@ class Marker extends Model_Base {
 
 		$args = wp_parse_args( $args, array(
 			'address'     => '',
+			'icon'        => null,
 			'info_window' => '',
 			'label'       => new Marker_Label(),
 			'title'       => '',
@@ -77,6 +83,15 @@ class Marker extends Model_Base {
 		}
 
 		parent::__construct( $args );
+
+	}
+
+	/**
+	 * @return array
+	 */
+	public function icon() {
+
+		return $this->_icon;
 
 	}
 
@@ -159,6 +174,22 @@ class Marker extends Model_Base {
 	}
 
 	/**
+	 * @param string|array $icon
+	 */
+	public function set_icon( $icon ) {
+
+		if ( is_string( $icon ) ) {
+			//assume $icon is an URL
+			$icon = array(
+				'url' => (string)$icon,
+			);
+		}
+
+		$this->_icon = $icon;
+
+	}
+
+	/**
 	 * @param  array $args
 	 * @return array
 	 */
@@ -168,11 +199,12 @@ class Marker extends Model_Base {
 
 		$args = wp_parse_args( $args, array(
 			'position'  => $this->position(),
+			'icon'      => $this->icon(),
 			'label'     => $this->label()->options(),
 			'title'     => $this->title(),
 		) );
 
-		return $args;
+		return array_filter( $args );
 
 	}
 

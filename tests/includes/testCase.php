@@ -154,6 +154,7 @@ class TestCase extends \WP_UnitTestCase {
 		$marker->shouldReceive('position')->andReturn(array('lat' => 100, 'lng' => -100));
 		$marker->shouldReceive('title')->andReturn('Sample Title');
 		$marker->shouldReceive('info_window')->andReturn($this->getMockInfoWindow());
+		$marker->shouldReceive('icon')->andReturn(array('url' => 'http://foo.com/bar.png'));
 
 		return $marker;
 	}
