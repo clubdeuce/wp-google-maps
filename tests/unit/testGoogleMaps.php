@@ -27,10 +27,12 @@ class TestGoogleMaps extends TestCase {
 	}
 
 	/**
-	 * @covers  ::initialize
+	 * @covers ::initialize
 	 */
 	public function testInitialize() {
 
+		Google_Maps::initialize();
+		
 		$this->assertEquals(dirname(dirname(__DIR__)), Google_Maps::source_dir());
 		$this->assertGreaterThan(0, has_action('wp_enqueue_scripts', array(Google_Maps::class, '_wp_enqueue_scripts_9')));
 
