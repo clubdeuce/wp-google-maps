@@ -38,3 +38,5 @@ plugins:
         - php
   sonarphp:
     enabled: true
+exclude-patterns:
+  - assets/marker-clusterer.js
