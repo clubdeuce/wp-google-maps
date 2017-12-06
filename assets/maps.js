@@ -1,4 +1,4 @@
-var gmMaps = {};
+
 var geocoder = new google.maps.Geocoder;
 
 jQuery(document).ready(function ($) {
@@ -27,13 +27,13 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
   addInfoWindows(map, markers, infoWindows);
 
   if (gmMaps.useClusters) {
-    var markerCluster = new MarkerClusterer(map, markers, {
+    var markerClusterer = new MarkerClusterer(map, markers, {
       imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
   }
 
   // Add the map, markers, and infoWindow objects to a global variable
-  gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow};
+  gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow, markerClusterer: markerCluster};
 }
 
 /**
