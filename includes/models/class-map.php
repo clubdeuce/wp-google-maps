@@ -6,6 +6,7 @@ namespace Clubdeuce\WPGoogleMaps;
  * Class Map
  * @package Clubdeuce\WPGoogleMaps
  *
+ * @method bool  fit_bounds()
  * @method array styles()
  */
 class Map_Model extends Model_Base {
@@ -19,6 +20,14 @@ class Map_Model extends Model_Base {
 	 * @var array
 	 */
 	protected $_center;
+
+	/**
+	 * If set to true, the map's zoom level will be altered to ensure all markers are
+	 * in the viewport.
+	 *
+	 * @var bool
+	 */
+	protected $_fit_bounds;
 
 	/**
 	 * The Map element height (default: 400px).
@@ -42,6 +51,11 @@ class Map_Model extends Model_Base {
 	 * @var array
 	 */
 	protected $_styles = array();
+
+	/**
+	 * @var bool
+	 */
+	protected $_use_clusters;
 
 	/**
 	 * The Map element width (default: 100%).

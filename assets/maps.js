@@ -15,52 +15,65 @@ jQuery(document).ready(function ($) {
  * @param infoWindows
  */
 function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
-  var map = new google.maps.Map(document.getElementById(mapId), mapParams);
-  var markers = [];
-  var bounds = new google.maps.LatLngBounds();
+  var map        = new google.maps.Map(document.getElementById(mapId), mapParams);
   var infoWindow = new google.maps.InfoWindow();
 
-  jQuery.each(mapMarkers, function (key, object) {
-    object.map = map;
-    var marker = new google.maps.Marker(object);
-    markers.push(marker);
+  var markers = addMarkers(map, mapMarkers);
 
-    // Add the position of the marker to the bounds object
-    bounds.extend(object.position);
+  if (gmMaps.fitBounds) {
+    fitBounds(map, markers);
+  }
 
-    if (infoWindows && key in infoWindows) {
-      addInfoWindow(map, marker, infoWindows[key], infoWindow);
-    }
-  });
+  addInfoWindows(map, markers, infoWindows);
 
-  // Automatically ensure all markers fit on the map
-  // see https://wrightshq.com/playground/placing-multiple-markers-on-a-google-map-using-api-3/
-  if( 1 < jQuery(markers).length ) {
-    //Add a listener to enforce a minimum zoom level after the map is resized to fit all markers
-    google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
-      if (this.getZoom() > 15) {
-        this.setZoom(15);
-      }
+  if (gmMaps.useClusters) {
+    var markerCluster = new MarkerClusterer(map, markers, {
+      imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
-    
-    map.fitBounds(bounds);
   }
 
   // Add the map, markers, and infoWindow objects to a global variable
   gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow};
 }
 
-function addInfoWindow(map, marker, iWindow, infoWindow) {
-  // Add the info box open click listener only if there is info window content
-  if (iWindow.content.trim()) {
-    marker.addListener('click', function () {
-      infoWindow.setContent(iWindow.content);
-      infoWindow.open(map, marker);
-    });
-  }
+/**
+ * @param   map
+ * @param   {Array} mapMarkers
+ * @returns {Array}
+ */
+function addMarkers(map, mapMarkers) {
+  markers = [];
+
+  jQuery.each(mapMarkers, function (key, object) {
+    object.map = map;
+    marker = new google.maps.Marker(object);
+    markers.push(marker);
+  });
+
+  return markers;
 }
 
-// Get the browser location using HTML 5 Geolocation
+/**
+ *
+ * @param map
+ * @param {Array} markers
+ * @param {Array} windows
+ */
+function addInfoWindows(map, markers, windows) {
+  jQuery.each(markers, function(key, marker){
+    // Add the info box open click listener only if there is info window content
+    if (windows[key].content.trim()) {
+      marker.addListener('click', function () {
+        infoWindow.setContent(iWindow.content);
+        infoWindow.open(map, marker);
+      });
+    }
+  })
+}
+
+/**
+ * Get the browser location using HTML 5 Geolocation
+ */
 function userLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -70,6 +83,9 @@ function userLocation() {
   }
 }
 
+/**
+ * @param error
+ */
 function userLocationError(error) {
   var errorMessage = '';
 
@@ -108,4 +124,27 @@ function addressFromLocation(lat, lng) {
       }
     }
   });
+}
+
+/**
+ * @param map
+ * @param markers
+ * @returns {boolean}
+ */
+function fitBounds(map, markers) {
+  var fitBounds = false;
+
+  // Automatically ensure all markers fit on the map
+  // see https://wrightshq.com/playground/placing-multiple-markers-on-a-google-map-using-api-3/
+  if( 1 < jQuery(markers).length ) {
+    bounds = new google.maps.LatLngBounds();
+    jQuery.each(markers, function(key, marker) {
+      // Add the position of the marker to the bounds object
+      bounds.extend(marker.getPosition());
+      map.fitBounds(bounds);
+    });
+    fitBounds = true;
+  }
+
+  return fitBounds;
 }

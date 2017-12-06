@@ -28,7 +28,17 @@ class Map_View {
 	 * @param array $args
 	 */
 	public function the_map( $args = array() ) { 
-		
+
+		if ( $this->_model->use_clusters() ) {
+			$args['useClusters'] = true;
+		}
+
+		if ( $this->_model->fit_bounds() ) {
+			$args['fitBounds'] = true;
+		}
+
+		wp_localize_script( 'google-marker-clusterer', 'gmMaps', $args );
+
 		$args = wp_parse_args( $args, array(
 			'template' => Google_Maps::source_dir() . '/templates/map-view.php',
 		) );
