@@ -33,7 +33,7 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
   }
 
   // Add the map, markers, and infoWindow objects to a global variable
-  gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow, markerClusterer: markerCluster};
+  gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow, markerClusterer: markerClusterer};
 }
 
 /**
