@@ -8,6 +8,7 @@ namespace Clubdeuce\WPGoogleMaps;
  *
  * @method bool  fit_bounds()
  * @method array styles()
+ * @method bool  use_clusters()
  */
 class Map_Model extends Model_Base {
 
