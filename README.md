@@ -6,6 +6,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/?branch=master)
 [![Build Status](https://travis-ci.org/clubdeuce/wp-google-maps.svg?branch=master)](https://travis-ci.org/clubdeuce/wp-google-maps)
+[![DeepScan Grade](https://deepscan.io/api/projects/1375/branches/3954/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1375&bid=3954)
 
 A Google Maps library for WordPress.
 
