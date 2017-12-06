@@ -182,6 +182,9 @@ class TestCase extends \WP_UnitTestCase {
 		$model->shouldReceive('width')->andReturn('100%');
 		$model->shouldReceive('make_args')->andReturn(array('center' => array('lat' => 100, 'lng' => -100), 'zoom' => 5));
 		$model->shouldReceive('zoom')->andReturn('5');
+		$model->shouldReceive('use_clusters')->andReturn(false);
+		$model->shouldReceive('fit_bounds')->andReturn(false);
+
 		return $model;
 	}
 }
