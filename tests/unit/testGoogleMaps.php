@@ -27,7 +27,7 @@ class TestGoogleMaps extends TestCase {
 	}
 
 	/**
-	 * @covers::initialize
+	 * @covers  ::initialize
 	 */
 	public function testInitialize() {
 
