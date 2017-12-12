@@ -89,7 +89,7 @@ function addressFromLocation(lat, lng) {
   var latLng = new google.maps.LatLng(lat, lng);
   var address = "";
   geocoder.geocode({"latLng": latLng}, function (results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
+    if (status === google.maps.GeocoderStatus.OK) {
       if (results[0]) {
         gmMaps["userLocation"]["address"] = results[0].formatted_address;
       }
