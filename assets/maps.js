@@ -38,7 +38,7 @@ function userLocation() {
 }
 
 jQuery(document).ready(function ($) {
-  if ("https" == window.location.protocol) {
+  if ("https" === window.location.protocol) {
     userLocation();
   }
 });
