@@ -1,40 +1,47 @@
-
+var gmMaps;
 var geocoder = new google.maps.Geocoder;
+
+/**
+ * @param error
+ */
+function userLocationError(error) {
+  var errorMessage = '';
+
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      errorMessage = "User denied the request for Geolocation.";
+      break;
+    case error.POSITION_UNAVAILABLE:
+      errorMessage = "Location information is unavailable.";
+      break;
+    case error.TIMEOUT:
+      errorMessage = "The request to get user location timed out.";
+      break;
+    case error.UNKNOWN_ERROR:
+      errorMessage = "An unknown error occurred.";
+      break;
+  }
+
+  gmMaps['userLocation'] = {status: 'error', code: error.code, message: errorMessage};
+}
+
+/**
+ * Get the browser location using HTML 5 Geolocation
+ */
+function userLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      gmMaps["userLocation"] = {position: position};
+      addressFromLocation(position.coords.latitude, position.coords.longitude);
+    }, userLocationError);
+  }
+}
 
 jQuery(document).ready(function ($) {
   if ('https' == window.location.protocol) {
     userLocation();
   }
 });
-
-/**
- *
- * @param mapId
- * @param mapParams
- * @param mapMarkers
- * @param infoWindows
- */
-function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
-  var map        = new google.maps.Map(document.getElementById(mapId), mapParams);
-  var infoWindow = new google.maps.InfoWindow();
-
-  var markers = addMarkers(map, mapMarkers);
-
-  if (gmMaps.fitBounds) {
-    fitBounds(map, markers);
-  }
-
-  addInfoWindows(map, markers, infoWindows);
-
-  if (gmMaps.useClusters) {
-    var markerClusterer = new MarkerClusterer(map, markers, {
-      imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-    });
-  }
-
-  // Add the map, markers, and infoWindow objects to a global variable
-  gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow, markerClusterer: markerClusterer};
-}
 
 /**
  * @param   map
@@ -69,42 +76,6 @@ function addInfoWindows(map, markers, windows) {
       });
     }
   })
-}
-
-/**
- * Get the browser location using HTML 5 Geolocation
- */
-function userLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      gmMaps["userLocation"] = {position: position};
-      addressFromLocation(position.coords.latitude, position.coords.longitude);
-    }, userLocationError);
-  }
-}
-
-/**
- * @param error
- */
-function userLocationError(error) {
-  var errorMessage = '';
-
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      errorMessage = "User denied the request for Geolocation.";
-      break;
-    case error.POSITION_UNAVAILABLE:
-      errorMessage = "Location information is unavailable.";
-      break;
-    case error.TIMEOUT:
-      errorMessage = "The request to get user location timed out.";
-      break;
-    case error.UNKNOWN_ERROR:
-      errorMessage = "An unknown error occurred.";
-      break;
-  }
-
-  gmMaps['userLocation'] = {status: 'error', code: error.code, message: errorMessage};
 }
 
 /**
@@ -147,4 +118,33 @@ function fitBounds(map, markers) {
   }
 
   return fitBounds;
+}
+
+/**
+ *
+ * @param mapId
+ * @param mapParams
+ * @param mapMarkers
+ * @param infoWindows
+ */
+function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
+  var map        = new google.maps.Map(document.getElementById(mapId), mapParams);
+  var infoWindow = new google.maps.InfoWindow();
+
+  var markers = addMarkers(map, mapMarkers);
+
+  if (gmMaps.fitBounds) {
+    fitBounds(map, markers);
+  }
+
+  addInfoWindows(map, markers, infoWindows);
+
+  if (gmMaps.useClusters) {
+    var markerClusterer = new MarkerClusterer(map, markers, {
+      imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+    });
+  }
+
+  // Add the map, markers, and infoWindow objects to a global variable
+  gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow, markerClusterer: markerClusterer};
 }
