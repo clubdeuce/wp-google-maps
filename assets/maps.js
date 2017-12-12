@@ -31,7 +31,7 @@ function userLocationError(error) {
 function userLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      gmMaps["userLocation"] = {position: position};
+      gmMaps.userLocation = {position: position};
       addressFromLocation(position.coords.latitude, position.coords.longitude);
     }, userLocationError);
   }
