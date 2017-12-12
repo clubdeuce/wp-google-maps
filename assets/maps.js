@@ -38,7 +38,7 @@ function userLocation() {
 }
 
 jQuery(document).ready(function ($) {
-  if ('https' == window.location.protocol) {
+  if ("https" == window.location.protocol) {
     userLocation();
   }
 });
@@ -70,7 +70,7 @@ function addInfoWindows(map, markers, windows) {
   jQuery.each(markers, function(key, marker){
     // Add the info box open click listener only if there is info window content
     if (windows[key].content.trim()) {
-      marker.addListener('click', function () {
+      marker.addListener("click", function () {
         infoWindow.setContent(iWindow.content);
         infoWindow.open(map, marker);
       });
@@ -87,11 +87,11 @@ function addInfoWindows(map, markers, windows) {
 function addressFromLocation(lat, lng) {
   var geocoder = new google.maps.Geocoder;
   var latLng = new google.maps.LatLng(lat, lng);
-  var address = '';
-  geocoder.geocode({'latLng': latLng}, function (results, status) {
+  var address = "";
+  geocoder.geocode({"latLng": latLng}, function (results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       if (results[0]) {
-        gmMaps['userLocation']['address'] = results[0].formatted_address;
+        gmMaps["userLocation"]["address"] = results[0].formatted_address;
       }
     }
   });
@@ -141,7 +141,7 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
 
   if (gmMaps.useClusters) {
     var markerClusterer = new MarkerClusterer(map, markers, {
-      imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+      imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
     });
   }
 
