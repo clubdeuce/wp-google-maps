@@ -5,7 +5,7 @@ var geocoder = new google.maps.Geocoder;
  * @param error
  */
 function userLocationError(error) {
-  var errorMessage = '';
+  var errorMessage = "";
 
   switch (error.code) {
     case error.PERMISSION_DENIED:
@@ -22,7 +22,7 @@ function userLocationError(error) {
       break;
   }
 
-  gmMaps['userLocation'] = {status: 'error', code: error.code, message: errorMessage};
+  gmMaps["userLocation"] = {status: "error", code: error.code, message: errorMessage};
 }
 
 /**
@@ -75,7 +75,7 @@ function addInfoWindows(map, markers, windows) {
         infoWindow.open(map, marker);
       });
     }
-  })
+  });
 }
 
 /**
@@ -108,7 +108,7 @@ function fitBounds(map, markers) {
   // Automatically ensure all markers fit on the map
   // see https://wrightshq.com/playground/placing-multiple-markers-on-a-google-map-using-api-3/
   if( 1 < jQuery(markers).length ) {
-    bounds = new google.maps.LatLngBounds();
+    var bounds = new google.maps.LatLngBounds();
     jQuery.each(markers, function(key, marker) {
       // Add the position of the marker to the bounds object
       bounds.extend(marker.getPosition());
