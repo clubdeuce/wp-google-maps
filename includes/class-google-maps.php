@@ -193,7 +193,7 @@ class Google_Maps {
 	public static function geocoder() {
 
 		if ( ! isset( static::$_geocoder ) ) {
-			static::$_geocoder = new Geocoder( ['api_key' => self::api_key() ] );
+			static::$_geocoder = new Geocoder( [ 'api_key' => self::api_key() ] );
 		}
 
 		return static::$_geocoder;
@@ -238,7 +238,7 @@ class Google_Maps {
 		wp_register_script( 'google-marker-clusterer', self::source_url() . '/assets/markerclusterer.js', array(), '1.0.1', true );
 		wp_register_script( 'map-control', $source, array( 'jquery', 'google-maps' ), self::version(), true );
 		wp_register_style( 'map', self::source_url() . '/assets/map.css' );
-
+		
 	}
 
 	/**
