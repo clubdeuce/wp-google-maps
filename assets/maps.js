@@ -1,8 +1,8 @@
 /* global google MarkerClusterer*/
 
 var gmMaps;
-var geocoder = new google.maps.Geocoder;
-var infoWindow;
+var geocoder   = new google.maps.Geocoder;
+var infoWindow = new google.maps.InfoWindow();
 
 /**
  * @param error
@@ -93,7 +93,7 @@ function addInfoWindows(map, markers, windows) {
     // Add the info box open click listener only if there is info window content
     if (windows[key].content.trim()) {
       marker.addListener("click", function () {
-        infoWindow.setContent(iWindow.content);
+        infoWindow.setContent(windows[key].content);
         infoWindow.open(map, marker);
       });
     }
@@ -132,7 +132,6 @@ function fitBounds(map, markers) {
  */
 function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
   var map        = new google.maps.Map(document.getElementById(mapId), mapParams);
-  var infoWindow = new google.maps.InfoWindow();
 
   var markers = addMarkers(map, mapMarkers);
 
