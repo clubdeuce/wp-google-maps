@@ -28,6 +28,25 @@ function userLocationError(error) {
 }
 
 /**
+ *
+ * @param lat
+ * @param lng
+ * @returns {*}
+ */
+function addressFromLocation(lat, lng) {
+  var geocoder = new google.maps.Geocoder;
+  var latLng = new google.maps.LatLng(lat, lng);
+  var address = "";
+  geocoder.geocode({"latLng": latLng}, function (results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[0]) {
+        gmMaps["userLocation"]["address"] = results[0].formatted_address;
+      }
+    }
+  });
+}
+
+/**
  * Get the browser location using HTML 5 Geolocation
  */
 function userLocation() {
@@ -76,25 +95,6 @@ function addInfoWindows(map, markers, windows) {
         infoWindow.setContent(iWindow.content);
         infoWindow.open(map, marker);
       });
-    }
-  });
-}
-
-/**
- *
- * @param lat
- * @param lng
- * @returns {*}
- */
-function addressFromLocation(lat, lng) {
-  var geocoder = new google.maps.Geocoder;
-  var latLng = new google.maps.LatLng(lat, lng);
-  var address = "";
-  geocoder.geocode({"latLng": latLng}, function (results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      if (results[0]) {
-        gmMaps["userLocation"]["address"] = results[0].formatted_address;
-      }
     }
   });
 }
