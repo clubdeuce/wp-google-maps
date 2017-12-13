@@ -40,7 +40,7 @@ function addressFromLocation(lat, lng) {
   geocoder.geocode({"latLng": latLng}, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[0]) {
-        gmMaps["userLocation"]["address"] = results[0].formatted_address;
+        gmMaps.userLocation.address = results[0].formatted_address;
       }
     }
   });
