@@ -2,6 +2,7 @@
 
 var gmMaps;
 var geocoder = new google.maps.Geocoder;
+var infoWindow;
 
 /**
  * @param error
@@ -70,11 +71,11 @@ jQuery(document).ready(function ($) {
  * @returns {Array}
  */
 function addMarkers(map, mapMarkers) {
-  markers = [];
+  var markers = [];
 
   jQuery.each(mapMarkers, function (key, object) {
     object.map = map;
-    marker = new google.maps.Marker(object);
+    var marker = new google.maps.Marker(object);
     markers.push(marker);
   });
 
