@@ -1,3 +1,5 @@
+/* global google */
+
 var gmMaps;
 var geocoder = new google.maps.Geocoder;
 
@@ -17,12 +19,12 @@ function userLocationError(error) {
     case error.TIMEOUT:
       errorMessage = "The request to get user location timed out.";
       break;
-    case error.UNKNOWN_ERROR:
+    default:
       errorMessage = "An unknown error occurred.";
       break;
   }
 
-  gmMaps["userLocation"] = {status: "error", code: error.code, message: errorMessage};
+  gmMaps.userLocation = {status: "error", code: error.code, message: errorMessage};
 }
 
 /**
