@@ -120,6 +120,15 @@ function fitBounds(map, markers) {
     fitBounds = true;
   }
 
+  /**
+   * Enforce a maximum zoom of 15
+   */
+  google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
+    if(15 < map.getZoom()) {
+      map.setZoom(15);
+    }
+  });
+
   return fitBounds;
 }
 
