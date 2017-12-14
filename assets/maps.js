@@ -110,7 +110,7 @@ function fitBounds(map, markers) {
 
   // Automatically ensure all markers fit on the map
   // see https://wrightshq.com/playground/placing-multiple-markers-on-a-google-map-using-api-3/
-  if( 1 < jQuery(markers).length ) {
+  if( 1 <= jQuery(markers).length ) {
     var bounds = new google.maps.LatLngBounds();
     jQuery.each(markers, function(key, marker) {
       // Add the position of the marker to the bounds object
