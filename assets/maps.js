@@ -89,15 +89,17 @@ function addMarkers(map, mapMarkers) {
  * @param {Array} windows
  */
 function addInfoWindows(map, markers, windows) {
-  jQuery.each(markers, function(key, marker){
-    // Add the info box open click listener only if there is info window content
-    if (windows[key].content.trim()) {
-      marker.addListener("click", function () {
-        infoWindow.setContent(windows[key].content);
-        infoWindow.open(map, marker);
-      });
-    }
-  });
+  if ( windows !== undefined ) {
+    jQuery.each(markers, function(key, marker){
+      // Add the info box open click listener only if there is info window content
+      if (windows[key].content.trim()) {
+        marker.addListener("click", function () {
+          infoWindow.setContent(windows[key].content);
+          infoWindow.open(map, marker);
+        });
+      }
+    });
+  }
 }
 
 /**
