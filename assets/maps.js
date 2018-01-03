@@ -89,7 +89,7 @@ function addMarkers(map, mapMarkers) {
  * @param {Array} windows
  */
 function addInfoWindows(map, markers, windows) {
-  if ( windows !== undefined ) {
+  if (typeOf(windows) !== "undefined") {
     jQuery.each(markers, function(key, marker){
       // Add the info box open click listener only if there is info window content
       if (windows[key].content.trim()) {
