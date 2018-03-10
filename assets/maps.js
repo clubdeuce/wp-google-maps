@@ -1,6 +1,6 @@
 /* global google MarkerClusterer*/
 
-var gmMaps;
+var gmMaps     = {};
 var geocoder   = new google.maps.Geocoder;
 var infoWindow = new google.maps.InfoWindow();
 
@@ -89,14 +89,16 @@ function addMarkers(map, mapMarkers) {
  * @param {Array} windows
  */
 function addInfoWindows(map, markers, windows) {
-  if (typeOf(windows) !== "undefined") {
+  if (typeof(windows) !== "undefined") {
     jQuery.each(markers, function(key, marker){
-      // Add the info box open click listener only if there is info window content
-      if (windows[key].content.trim()) {
-        marker.addListener("click", function () {
-          infoWindow.setContent(windows[key].content);
-          infoWindow.open(map, marker);
-        });
+      if(windows[key].content) {
+        // Add the info box open click listener only if there is info window content
+        if (windows[key].content.trim()) {
+          marker.addListener("click", function () {
+            infoWindow.setContent(windows[key].content);
+            infoWindow.open(map, marker);
+          });
+        }
       }
     });
   }
@@ -146,17 +148,18 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
 
   var markers = addMarkers(map, mapMarkers);
 
-  if (gmMaps.fitBounds) {
-    fitBounds(map, markers);
+  if (gmMaps) {
+    if (gmMaps.fitBounds) {
+      fitBounds(map, markers);
+    }
+    if (gmMaps.useClusters) {
+      var markerClusterer = new MarkerClusterer(map, markers, {
+        imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+      });
+    }
   }
 
   addInfoWindows(map, markers, infoWindows);
-
-  if (gmMaps.useClusters) {
-    var markerClusterer = new MarkerClusterer(map, markers, {
-      imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
-    });
-  }
 
   // Add the map, markers, and infoWindow objects to a global variable
   gmMaps[mapId] = {map: map, markers: markers, infoWindow: infoWindow, markerClusterer: markerClusterer};
