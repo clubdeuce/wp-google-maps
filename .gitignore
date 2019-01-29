@@ -3,3 +3,4 @@ wp-tests
 phpunit.xml
 wp
 reports
+node_modules

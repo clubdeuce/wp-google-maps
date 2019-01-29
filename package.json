@@ -1,0 +1,19 @@
+{
+  "name": "wp-google-maps",
+  "version": "0.2.0",
+  "description": "A Google Maps library for WordPress",
+  "dependencies": {
+    "jshint": "^2.9.7"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clubdeuce/wp-google-maps.git"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/clubdeuce/wp-google-maps/issues"
+  },
+  "homepage": "https://github.com/clubdeuce/wp-google-maps#readme"
+}

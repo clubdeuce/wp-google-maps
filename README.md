@@ -1,7 +1,5 @@
 # WP Google Maps
 
-[![Join the chat at https://gitter.im/clubdeuce/wp-google-maps](https://badges.gitter.im/clubdeuce/wp-google-maps.svg)](https://gitter.im/clubdeuce/wp-google-maps?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/clubdeuce/wp-google-maps.svg?columns=all)](https://waffle.io/clubdeuce/wp-google-maps)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/clubdeuce/wp-google-maps/?branch=master)

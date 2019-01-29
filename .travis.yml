@@ -1,12 +1,12 @@
 language: php
 php:
-  - 7.0
   - 7.1
+  - 7.2
 
 env:
-  - WP_VERSION="4.8.1"
-  - WP_VERSION="4.8.2"
-  - WP_VERSION="4.8.3"
+  - WP_VERSION="4.9.9"
+  - WP_VERSION="5.0.0"
+  - WP_VERSION="5.0.3"
 
 install:
   - composer install
