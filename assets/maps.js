@@ -35,15 +35,16 @@ function userLocationError(error) {
  * @returns {*}
  */
 function addressFromLocation(lat, lng) {
-  var geocoder = new google.maps.Geocoder;
-  var latLng = new google.maps.LatLng(lat, lng);
-  var address = "";
+  let geocoder = new google.maps.Geocoder;
+  let latLng = new google.maps.LatLng(lat, lng);
+  let address = "";
   geocoder.geocode({"latLng": latLng}, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[0]) {
-        gmMaps.userLocation.address = results[0].formatted_address;
+        address = results[0].formatted_address;
       }
     }
+    return address;
   });
 }
 
@@ -53,8 +54,10 @@ function addressFromLocation(lat, lng) {
 function userLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      gmMaps.userLocation = {position: position};
-      addressFromLocation(position.coords.latitude, position.coords.longitude);
+      gmMaps.userLocation = {
+        position: position,
+        address: addressFromLocation(position.coords.latitude, position.coords.longitude)
+      };
     }, userLocationError);
   }
 }
