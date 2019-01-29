@@ -83,7 +83,7 @@ class Geocoder {
 		return sprintf(
 			'https://maps.googleapis.com/maps/api/geocode/json?address=%1$s&key=%2$s',
 			urlencode( filter_var( $address, FILTER_SANITIZE_STRING ) ),
-			self::api_key()
+			$this->api_key()
 		);
 
 	}
@@ -99,8 +99,8 @@ class Geocoder {
 		$response = new Location( array(
 			'address'           => $results['formatted_address'],
 			'formatted_address' => $results['formatted_address'],
-			'state'             => self::_get_state_from_results( $results ),
-			'zip_code'          => self::_get_zip_from_results( $results ),
+			'state'             => $this->_get_state_from_results( $results ),
+			'zip_code'          => $this->_get_zip_from_results( $results ),
 			'latitude'          => $results['geometry']['location']['lat'],
 			'longitude'         => $results['geometry']['location']['lng'],
 			'place_id'          => $results['place_id'],
@@ -118,7 +118,7 @@ class Geocoder {
 	 */
 	private function _get_state_from_results( $results ) {
 
-		return self::_get_value_from_results( 'administrative_area_level_1', $results );
+		return $this->_get_value_from_results( 'administrative_area_level_1', $results );
 
 	}
 
@@ -128,7 +128,7 @@ class Geocoder {
 	 */
 	private function _get_zip_from_results( $results ) {
 
-		return self::_get_value_from_results( 'postal_code', $results );
+		return $this->_get_value_from_results( 'postal_code', $results );
 
 	}
 
