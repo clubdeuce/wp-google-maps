@@ -1,14 +1,12 @@
 /* global google MarkerClusterer*/
-
-var gmMaps     = {};
-var geocoder   = new google.maps.Geocoder;
-var infoWindow = new google.maps.InfoWindow();
+let geocoder   = new google.maps.Geocoder;
+let infoWindow = new google.maps.InfoWindow();
 
 /**
  * @param error
  */
 function userLocationError(error) {
-  var errorMessage = "";
+  let errorMessage = "";
 
   switch (error.code) {
     case error.PERMISSION_DENIED:
@@ -25,26 +23,24 @@ function userLocationError(error) {
       break;
   }
 
-  gmMaps.userLocation = {status: "error", code: error.code, message: errorMessage};
+  return {status: "error", code: error.code, message: errorMessage};
 }
 
 /**
  *
  * @param lat
  * @param lng
- * @returns {*}
  */
 function addressFromLocation(lat, lng) {
   let geocoder = new google.maps.Geocoder;
   let latLng = new google.maps.LatLng(lat, lng);
-  let address = "";
+  
   geocoder.geocode({"latLng": latLng}, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[0]) {
-        address = results[0].formatted_address;
+        gmMaps.userLocation.address = results[0].formatted_address;
       }
     }
-    return address;
   });
 }
 
@@ -55,15 +51,19 @@ function userLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       gmMaps.userLocation = {
+        status: "success",
         position: position,
-        address: addressFromLocation(position.coords.latitude, position.coords.longitude)
+        address: null
       };
-    }, userLocationError);
+      addressFromLocation(position.coords.latitude, position.coords.longitude)
+    }, function(error){
+      gmMaps.userLocation = userLocationError(error);
+    });
   }
 }
 
 jQuery(document).ready(function ($) {
-  if ("https" === window.location.protocol) {
+  if ("https:" === window.location.protocol) {
     userLocation();
   }
 });
@@ -92,7 +92,7 @@ function addMarkers(map, mapMarkers) {
  * @param {Array} windows
  */
 function addInfoWindows(map, markers, windows) {
-  if (typeof(windows) !== "undefined") {
+  if (! jQuery.isEmptyObject(windows)) {
     jQuery.each(markers, function(key, marker){
       if(windows[key].content) {
         // Add the info box open click listener only if there is info window content
@@ -147,9 +147,8 @@ function fitBounds(map, markers) {
  * @param infoWindows
  */
 function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
-  var map        = new google.maps.Map(document.getElementById(mapId), mapParams);
-
-  var markers = addMarkers(map, mapMarkers);
+  let map     = new google.maps.Map(document.getElementById(mapId), mapParams);
+  let markers = addMarkers(map, mapMarkers);
 
   if (gmMaps) {
     if (gmMaps.fitBounds) {
