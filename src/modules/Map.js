@@ -8,7 +8,7 @@ export default class Map {
         }
 
         if (gmMaps.useClusters) {
-            let markerClusterer = new MarkerClusterer(this.map, markers, {
+            new MarkerClusterer(this.map, markers, {
                 imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
             });
         }
