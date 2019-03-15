@@ -5,7 +5,10 @@
   "dependencies": {
     "jshint": "^2.9.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/clubdeuce/wp-google-maps.git"
