@@ -1,5 +1,8 @@
 /**
- * @param error
+ * 
+ * @param {*} error 
+ * 
+ * @return {object}
  */
 function userLocationError(error) {
   let errorMessage = "";
@@ -25,18 +28,20 @@ function userLocationError(error) {
 /**
  * Get the browser location using HTML 5 Geolocation
  * 
- * @return object
+ * @return {object}
  */
 export default userLocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      return {
+      var result = {
         status: "success",
         position: position,
         address: null
       };
     }, function(error){
-      return userLocationError(error);
+      var result = userLocationError(error);
     });
+
+    return result;
   }
 }
