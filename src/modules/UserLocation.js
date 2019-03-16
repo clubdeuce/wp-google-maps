@@ -44,4 +44,4 @@ export default userLocation = () => {
 
     return result;
   }
-}
+};
