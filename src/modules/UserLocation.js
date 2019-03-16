@@ -4,7 +4,7 @@
  * 
  * @return {object}
  */
-function userLocationError(error) {
+export function userLocationError(error) {
   let errorMessage = "";
 
   switch (error.code) {
