@@ -2,10 +2,12 @@
   "name": "wp-google-maps",
   "version": "0.2.0",
   "description": "A Google Maps library for WordPress",
-  "dependencies": {
-    "jshint": "^2.9.7"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.5.0",
+    "jshint": "^2.10.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/clubdeuce/wp-google-maps/issues"
   },
-  "homepage": "https://github.com/clubdeuce/wp-google-maps#readme"
+  "homepage": "https://github.com/clubdeuce/wp-google-maps#readme",
+  "scripts": {
+    "test": "jest"
+  }
 }
