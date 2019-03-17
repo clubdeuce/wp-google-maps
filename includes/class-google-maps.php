@@ -228,10 +228,10 @@ class Google_Maps {
 	protected static function _register_scripts() {
 
 		$key    = static::api_key();
-		$source = sprintf( '%1$s/dist/scripts/main.js', self::source_url() );
+		$source = sprintf( '%1$s/dist/main.js', self::source_url() );
 
 		wp_register_script( 'google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}", false, '3.0', true );
-		wp_register_script( 'map-control', $source, array( 'jquery', 'google-maps' ), self::version(), true );
+		wp_register_script( 'map-control', $source, array( 'jquery', 'google-maps' ), self::version(), false );
 		wp_register_style( 'map', self::source_url() . '/assets/map.css' );
 		
 	}
