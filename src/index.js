@@ -8,19 +8,6 @@ var gmMaps = {}
 jQuery(document).ready(function ($) {
 
     if ("https:" === window.location.protocol) {
-        // getUserLocation().then(position => {
-        //     let {latitude, longitude} = position.coords;
-        //     gmMaps.userLocation = position;
-        //     new Geocoder().addressFromLocation(latitude, longitude, gmMaps)
-        //         .then(address => {
-        //             gmMaps.userLocation.address = address;
-        //             console.log(gmMaps);
-        //         });
-        // }).catch(error => {
-        //     console.log('error', error);
-        //     gmMaps.userLocation = userLocationError(error);
-        // });
-
         userLocation().then(position => {
             gmMaps.userLocation = position;
             let {latitude, longitude} = position.coords;
@@ -32,10 +19,6 @@ jQuery(document).ready(function ($) {
         });
     }
 });
-
-async function getUserLocation() {
-    return await userLocation();
-}
 
 /**
  * Create a Google map and add it to the gmMaps global varable.
