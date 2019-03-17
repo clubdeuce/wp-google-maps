@@ -40,3 +40,4 @@ plugins:
     enabled: true
 exclude-patterns:
   - "assets/marker-clusterer.js"
+  - "src/marker-clusterer.js"
