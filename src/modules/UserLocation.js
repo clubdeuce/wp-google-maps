@@ -1,10 +1,19 @@
+import Geocoder from "./Geocoder";
+
+function geolocateSuccess(position) {
+  return {
+    success: true,
+    position: position,
+  };
+}
+
 /**
  * 
  * @param {*} error 
  * 
  * @return {object}
  */
-export function userLocationError(error) {
+function userLocationError(error) {
   let errorMessage = "";
 
   switch (error.code) {
@@ -30,18 +39,14 @@ export function userLocationError(error) {
  * 
  * @return {object}
  */
-export default userLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var result = {
-        status: "success",
-        position: position,
-        address: null
-      };
-    }, function(error){
-      var result = userLocationError(error);
-    });
-
-    return result;
-  }
+const userLocation = () => {
+  return new Promise( (resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    } else {
+      reject(new Error( 'Navigator is not supported'));
+    }
+  });
 };
+
+export default userLocation;

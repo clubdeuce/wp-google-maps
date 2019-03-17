@@ -1,20 +1,41 @@
 require('./markerClusterer');
-import userLocation from './modules/UserLocation';
+import userLocation, { userLocationError } from './modules/UserLocation';
 import Geocoder from './modules/Geocoder';
 import Map from './modules/Map';
 
-const gmMaps = {};
+var gmMaps = {}
 
 jQuery(document).ready(function ($) {
-    let geocoder = new Geocoder();
 
     if ("https:" === window.location.protocol) {
-        gmMaps.userLocation = userLocation();
-        if('success' === gmMaps.userLocation.status) {
-            gmMaps.userLocation.address = geocoder.addressFromLocation(gmMaps.userLocation);
-        }
+        // getUserLocation().then(position => {
+        //     let {latitude, longitude} = position.coords;
+        //     gmMaps.userLocation = position;
+        //     new Geocoder().addressFromLocation(latitude, longitude, gmMaps)
+        //         .then(address => {
+        //             gmMaps.userLocation.address = address;
+        //             console.log(gmMaps);
+        //         });
+        // }).catch(error => {
+        //     console.log('error', error);
+        //     gmMaps.userLocation = userLocationError(error);
+        // });
+
+        userLocation().then(position => {
+            gmMaps.userLocation = position;
+            let {latitude, longitude} = position.coords;
+            new Geocoder().addressFromLocation(latitude, longitude)
+                .then(address => {
+                    gmMaps.userLocation.address = address;
+                    console.log(gmMaps);
+                });
+        });
     }
 });
+
+async function getUserLocation() {
+    return await userLocation();
+}
 
 /**
  * Create a Google map and add it to the gmMaps global varable.
@@ -24,6 +45,6 @@ jQuery(document).ready(function ($) {
  * @param {array} markers      An array containing map markers
  * @param {array} infoWindows  An array containing info window objects
  */
-function generate_map(mapId, mapParams, markers, infoWindows = []) {
+function generate_map(mapId, mapParams, markers, infoWindows) {
     gmMaps[mapId] = new Map(mapId, mapParams, markers, infoWindows);
 }
