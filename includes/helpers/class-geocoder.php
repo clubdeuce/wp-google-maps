@@ -63,7 +63,8 @@ class Geocoder {
 			$results = json_decode( wp_remote_retrieve_body( $response ), true );
 
 			if ( 0 === count( $results['results'] ) ) {
-				$location = new \WP_Error( '100', sprintf( '%1$s: %2$s', $results['status'], $results['error_message'] ) );
+				$error_message = isset( $results['error_message'] ) ? $results['error_message'] : 'Unknown error';
+				$location = new \WP_Error( '100', sprintf( '%1$s: %2$s', $results['status'], $error_message ) );
 				break;
 			}
 
