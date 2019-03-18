@@ -1,9 +1,9 @@
 require('./markerClusterer');
-import userLocation, { userLocationError } from './modules/UserLocation';
+import userLocation from './modules/UserLocation';
 import Geocoder from './modules/Geocoder';
 import Map from './modules/Map';
 
-window.gmMaps = {}
+window.gmMaps = {};
 
 jQuery(document).ready(function ($) {
 
@@ -27,14 +27,22 @@ jQuery(document).ready(function ($) {
  * @param {array} markers      An array containing map markers
  * @param {array} infoWindows  An array containing info window objects
  */
-window.generate_map = function(mapId, mapParams, markers, infoWindows) {
-    // let gmap = new google.maps.Map(document.getElementById(mapId), mapParams);
+window.generate_map = function(mapId, mapParams, markers, infoWindows, options = []) {
     let map            = new Map(mapId, mapParams, markers, infoWindows);
     let gMap           = map.gMap;
     let mapMarkers     = map.addMarkers(markers, gMap);
 
     map.addInfoWindows(mapMarkers, infoWindows, gMap);
-    map.fitBounds(mapMarkers, gMap);
+
+    if(options.fitBounds) {
+        map.fitBounds(mapMarkers, gMap);
+    }
+
+    if (options.useClusters) {
+        new MarkerClusterer(gMap, mapMarkers, {
+            imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+        });
+    }
 
     window.gmMaps[mapId] = {
         map: gMap,

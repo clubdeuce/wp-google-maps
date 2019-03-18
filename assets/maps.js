@@ -155,7 +155,7 @@ function generate_map(mapId, mapParams, mapMarkers, infoWindows) {
       fitBounds(map, markers);
     }
     if (gmMaps.useClusters) {
-      var markerClusterer = new MarkerClusterer(map, markers, {
+      var markerClusterer = new window.MarkerClusterer(map, markers, {
         imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
       });
     }

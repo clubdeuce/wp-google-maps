@@ -3,12 +3,6 @@ export default class Map {
         this.gMap    = new google.maps.Map(document.getElementById(mapId), params);
         this.params  = params;
         this.options = options;
-
-        // if (options.useClusters) {
-        //     new MarkerClusterer(this.map, markers, {
-        //         imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
-        //     });
-        // }
     }
 
     /**

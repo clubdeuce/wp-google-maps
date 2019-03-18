@@ -37,8 +37,6 @@ class Map_View {
 			$args['fitBounds'] = true;
 		}
 
-		wp_localize_script( 'google-marker-clusterer', 'gmMaps', $args );
-
 		$args = wp_parse_args( $args, array(
 			'template' => Google_Maps::source_dir() . '/templates/map-view.php',
 		) );
