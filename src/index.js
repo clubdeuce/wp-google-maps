@@ -3,18 +3,17 @@ import userLocation, { userLocationError } from './modules/UserLocation';
 import Geocoder from './modules/Geocoder';
 import Map from './modules/Map';
 
-var gmMaps = {}
+window.gmMaps = {}
 
 jQuery(document).ready(function ($) {
 
     if ("https:" === window.location.protocol) {
         userLocation().then(position => {
-            gmMaps.userLocation = position;
+            window.gmMaps.userLocation = position;
             let {latitude, longitude} = position.coords;
             new Geocoder().addressFromLocation(latitude, longitude)
                 .then(address => {
-                    gmMaps.userLocation.address = address;
-                    console.log(gmMaps);
+                    window.gmMaps.userLocation.address = address;
                 });
         });
     }
@@ -28,6 +27,19 @@ jQuery(document).ready(function ($) {
  * @param {array} markers      An array containing map markers
  * @param {array} infoWindows  An array containing info window objects
  */
-function generate_map(mapId, mapParams, markers, infoWindows) {
-    gmMaps[mapId] = new Map(mapId, mapParams, markers, infoWindows);
+window.generate_map = function(mapId, mapParams, markers, infoWindows) {
+    // let gmap = new google.maps.Map(document.getElementById(mapId), mapParams);
+    let map            = new Map(mapId, mapParams, markers, infoWindows);
+    let gMap           = map.gMap;
+    let mapMarkers     = map.addMarkers(markers, gMap);
+
+    map.addInfoWindows(mapMarkers, infoWindows, gMap);
+    map.fitBounds(mapMarkers, gMap);
+
+    window.gmMaps[mapId] = {
+        map: gMap,
+        params: mapParams,
+        markers: mapMarkers,
+        infoWindows: infoWindows,
+    }
 }
