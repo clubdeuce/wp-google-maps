@@ -1,12 +1,5 @@
 import Geocoder from "./Geocoder";
 
-function geolocateSuccess(position) {
-  return {
-    success: true,
-    position: position,
-  };
-}
-
 /**
  * 
  * @param {*} error 
