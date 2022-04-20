@@ -21,12 +21,12 @@
     "php": ">=5.6.0"
   },
   "require-dev": {
-    "johnpbloch/wordpress": "4.8.3",
+    "johnpbloch/wordpress": "5.9.3",
     "phpunit/phpunit": "5.6.2",
     "mockery/mockery": "0.9.5",
     "consolidation/robo": "^1.1",
     "patchwork/jsqueeze": "^2.0",
-    "natxet/CssMin": "~3.0"
+    "natxet/cssmin": "~3.0"
   },
   "extra": {
     "wordpress-install-dir": "wp"
@@ -35,5 +35,10 @@
     "issues": "https://github.com/clubdeuce/wp-google-maps/issues",
     "source":"https://github.com/clubdeuce/wp-google-maps",
     "docs": "https://github.com/clubdeuce/wp-google-maps/wiki"
+  },
+  "config": {
+    "allow-plugins": {
+      "johnpbloch/wordpress-core-installer": true
+    }
   }
 }
