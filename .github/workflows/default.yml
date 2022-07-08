@@ -47,6 +47,7 @@ jobs:
         run: |
           export WP_TESTS_DIR=$PWD/wp-tests/tags/6.0
           export XDEBUG_MODE=coverage
+          export MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}
           vendor/bin/phpunit --coverage-clover build/logs/clover.xml -c tests/phpunit.xml.dist
 
       - name: Upload coverage results to Coveralls
