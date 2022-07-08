@@ -4,7 +4,7 @@
   "description": "A Google Maps library for WordPress.",
   "keywords": [ "wordpress", "php", "library", "google maps", "maps" ],
   "homepage": "http://github.com/clubdeuce/wp-google-maps",
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Daryl Lozupone",
@@ -26,7 +26,8 @@
     "mockery/mockery": "0.9.5",
     "consolidation/robo": "^1.1",
     "patchwork/jsqueeze": "^2.0",
-    "natxet/cssmin": "~3.0"
+    "natxet/cssmin": "~3.0",
+    "yoast/phpunit-polyfills": "^1.0"
   },
   "extra": {
     "wordpress-install-dir": "wp"
