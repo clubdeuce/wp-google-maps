@@ -50,11 +50,6 @@ jobs:
           export MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}
           vendor/bin/phpunit --coverage-clover build/logs/clover.xml -c tests/phpunit.xml.dist
 
-      - name: Upload coverage results to Coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
-
       - name: Upload coverage results to Scrutinizer CI
         run: |
           wget https://scrutinizer-ci.com/ocular.phar
