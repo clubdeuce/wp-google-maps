@@ -20,7 +20,7 @@ class testMarker extends TestCase {
 	 */
 	protected $_marker;
 
-	public function setUp() {
+	public function setUp(): void {
 		$this->_marker = new Marker(array(
 			'address' => '1600 Ampitheatre Parkway',
 			'title'   => 'Headquarters',

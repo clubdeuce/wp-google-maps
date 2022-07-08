@@ -21,7 +21,7 @@ class TestMap extends TestCase {
 	 */
 	private $_map;
 
-	public function setUp() {
+	public function setUp(): void {
 		$this->_map = new Map(array(
 			'center'  => array('lat' => 100, 'lng' => -100),
 			'html_id' => 'foo-id',

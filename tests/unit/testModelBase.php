@@ -18,7 +18,7 @@ class TestModelBase extends TestCase {
 	 */
 	protected $_model;
 
-	public function setUp() {
+	public function setUp(): void {
 		$this->_model = new Model_Base(array('foo' => 'bar'));
 	}
 

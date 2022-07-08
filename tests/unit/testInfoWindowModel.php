@@ -18,7 +18,7 @@ class TestInfoWindowModel extends TestCase {
 	 */
 	private $_model;
 
-	public function setUp() {
+	public function setUp(): void {
 
 		$this->_model = new Info_Window(array(
 			'content'      => 'Lorem ipsum dolor est.',

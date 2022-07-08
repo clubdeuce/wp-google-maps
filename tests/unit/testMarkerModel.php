@@ -24,7 +24,7 @@ class TestMarkerModel extends TestCase {
 	 */
 	private $_position = array('lat' => 37.4224764, 'lng' => -122.0842499);
 
-	public function setUp() {
+	public function setUp(): void {
 
 		$this->_model = new Marker([
 			'address'  => $this->_address,

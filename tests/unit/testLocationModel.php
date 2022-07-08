@@ -18,7 +18,7 @@ class TestLocationModel extends TestCase {
 	 */
 	private $_location;
 
-	public function setUp() {
+	public function setUp(): void {
 		$this->_location = new Location([
 			'address'           => '1600 Amphitheatre Parkway Mountain View CA',
 			'formatted_address' => '1600 Amphitheatre Parkway, Mountain View, CA, 12345',

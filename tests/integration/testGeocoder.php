@@ -20,7 +20,7 @@ class TestGeocoder extends TestCase {
 	 */
 	private $_geocoder;
 
-	public function setUp() {
+	public function setUp(): void {
 		Google_Maps::register_api_key(getenv('MAPS_API_KEY'));
 		$this->_geocoder = new Geocoder();
 	}

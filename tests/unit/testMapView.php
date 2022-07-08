@@ -18,7 +18,7 @@ class testMapView extends TestCase {
 	 */
 	protected $_view;
 
-	public function setUp() {
+	public function setUp(): void {
 		$this->_view = new Map_View($this->getMockMapModel());
 		parent::setUp();
 	}

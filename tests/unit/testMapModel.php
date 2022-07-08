@@ -23,7 +23,7 @@ class testMapModel extends TestCase {
 	 */
 	private $_model;
 
-	public function setUp() {
+	public function setUp(): void {
 
 		$this->_model = new Map_Model(array(
 			'center'  => $this->_center,

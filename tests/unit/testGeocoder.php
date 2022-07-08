@@ -29,7 +29,7 @@ class TestGeocoder extends TestCase {
 	/**
 	 *
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		$this->_geocoder = new Geocoder(['api_key' => $this->_api_key]);
 	}
 
