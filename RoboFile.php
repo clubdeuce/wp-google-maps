@@ -16,13 +16,13 @@ class RoboFile extends \Robo\Tasks
 
 	}
 
-	function tests()
+	function tests( $version = '6.0' )
 	{
-
-		$this->taskExec('mysql -e "CREATE DATABASE IF NOT EXISTS test_db"')->run();
-		$this->taskExec('mysql -e "GRANT ALL ON test_db.* to \'root\'@\'%\'"')->run();
+		$this->taskExec('mysql -e "CREATE DATABASE IF NOT EXISTS wordpress"')->run();
+		$this->taskExec('mysql -e "CREATE USER \'worpdress\'@\'localhost\' IDENTIFIED BY \'wordpress\';"')->run();
+		$this->taskExec('mysql -e "GRANT ALL ON test_db.* to \'wordpress\'@\'localhost\'"')->run();
 		$this->taskSvnStack()
-		     ->checkout('https://develop.svn.wordpress.org/tags/4.8.3 wp-tests')
+		     ->checkout("https://develop.svn.wordpress.org/tags/{$version} wp-tests")
 		     ->run();
 
 		$this->setTestConfig();
@@ -47,17 +47,17 @@ class RoboFile extends \Robo\Tasks
 
 		$this->taskReplaceInFile( 'wp-tests/wp-tests-config.php')
 		     ->from('youremptytestdbnamehere')
-		     ->to('test_db')
+		     ->to('wordpress')
 		     ->run();
 
 		$this->taskReplaceInFile( 'wp-tests/wp-tests-config.php')
 		     ->from('yourusernamehere')
-		     ->to('root')
+		     ->to('wordpress')
 		     ->run();
 
 		$this->taskReplaceInFile( 'wp-tests/wp-tests-config.php')
 		     ->from('yourpasswordhere')
-		     ->to('')
+		     ->to('wordpress')
 		     ->run();
 	}
 
