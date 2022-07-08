@@ -83,7 +83,7 @@ class Geocoder {
 
 		return sprintf(
 			'https://maps.googleapis.com/maps/api/geocode/json?address=%1$s&key=%2$s',
-			urlencode( filter_var( $address, FILTER_SANITIZE_STRING ) ),
+			urlencode( $address ),
 			$this->api_key()
 		);
 
