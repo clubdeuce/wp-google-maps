@@ -19,8 +19,8 @@ class RoboFile extends \Robo\Tasks
 	function tests( $version = '6.0' )
 	{
 		$this->taskExec('mysql -e "CREATE DATABASE IF NOT EXISTS wordpress"')->run();
-		$this->taskExec('mysql -e "CREATE USER \'worpdress\'@\'localhost\' IDENTIFIED BY \'wordpress\';"')->run();
-		$this->taskExec('mysql -e "GRANT ALL ON test_db.* to \'wordpress\'@\'localhost\'"')->run();
+		$this->taskExec('mysql -e "CREATE USER \'wordpress\'@\'localhost\' IDENTIFIED BY \'wordpress\';"')->run();
+		$this->taskExec('mysql -e "GRANT ALL ON wordpress.* to \'wordpress\'@\'localhost\'"')->run();
 		$this->taskSvnStack()
 		     ->checkout("https://develop.svn.wordpress.org/tags/{$version} wp-tests")
 		     ->run();
