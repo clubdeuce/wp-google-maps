@@ -23,7 +23,7 @@
   "require-dev": {
     "johnpbloch/wordpress": "5.9.3",
     "phpunit/phpunit": "^9",
-    "mockery/mockery": "0.9.5",
+    "mockery/mockery": "^1.5",
     "consolidation/robo": "^1.1",
     "patchwork/jsqueeze": "^2.0",
     "natxet/cssmin": "~3.0",
