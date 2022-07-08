@@ -80,7 +80,7 @@ class Google_Maps {
 	 */
 	public static function register_api_key( $key ) {
 
-		static::$_api_key = filter_var( $key, FILTER_SANITIZE_STRING );
+		static::$_api_key = $key;
 
 	}
 
