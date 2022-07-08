@@ -115,7 +115,7 @@ class TestGoogleMaps extends TestCase {
 		$uri     = Google_Maps::driving_directions_href($address);
 		$pattern = sprintf('#^https://.*?%1$s.*?#', preg_quote(urlencode($address)));
 
-		$this->assertRegExp($pattern, $uri);
+		$this->assertMatchesRegularExpression($pattern, $uri);
 		$this->assertNotFalse(wp_http_validate_url($uri));
 
 	}

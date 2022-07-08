@@ -48,8 +48,8 @@ class TestGeocoder extends TestCase {
 		$response = $this->reflectionMethodInvokeArgs($this->_geocoder, '_make_url', '123 Anywhere Street New York 10001');
 
 		$this->assertIsString($response);
-		$this->assertRegExp('/address\=123\+Anywhere\+Street\+New\+York\+10001/', $response);
-		$this->assertRegExp("/key={$this->_api_key}/", $response);
+		$this->assertMatchesRegularExpression('/address\=123\+Anywhere\+Street\+New\+York\+10001/', $response);
+		$this->assertMatchesRegularExpression("/key={$this->_api_key}/", $response);
 	}
 
 	/**

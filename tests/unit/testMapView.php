@@ -86,8 +86,8 @@ class testMapView extends TestCase {
 		$this->_view->the_map();
 		$output = ob_get_clean();
 
-		$this->assertRegExp('#^<div id="map-foo"#', $output);
-		$this->assertRegExp('#class="wp-google-map"#', $output);
+		$this->assertMatchesRegularExpression('#^<div id="map-foo"#', $output);
+		$this->assertMatchesRegularExpression('#class="wp-google-map"#', $output);
 	}
 
 	/**
