@@ -5,7 +5,6 @@
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
-        verbose="true"
 >
     <testsuites>
         <testsuite name="unit">
@@ -15,10 +14,10 @@
             <directory suffix=".php">./integration/</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
+    <coverage>
+        <include>
             <directory suffix=".php">../includes</directory>
-            <file>../google-maps.php</file>
-        </whitelist>
-    </filter>
+			<file>../wplib.php</file>
+        </include>
+    </coverage>
 </phpunit>
