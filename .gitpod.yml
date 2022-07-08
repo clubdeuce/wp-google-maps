@@ -9,8 +9,13 @@ tasks:
       mysql -e "CREATE DATABASE wordpress;"
       mysql -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED by 'wordpress';"
       mysql -e "GRANT ALL ON wordpress.* to 'wordpress'@'localhost';"
-  - name: wp-tests
-    init: svn co https://develop.svn.wordpress.org ./wp-tests
+  - name: Checkout WP
+    init: |
+      svn co https://develop.svn.wordpress.org/tags/6.0 ./wp-tests/tags/6.0
+      cp ./wp-tests/tags/6.0/wp-tests-config-sample.php ./wp-tests/tags/6.0/wp-tests-config.php
+      sed -i 's/youremptytestdbnamehere/wordpress/g' ./wp-tests/tags/6.0/wp-tests-config.php
+      sed -i 's/yourusernamehere/wordpress/g' ./wp-tests/tags/6.0/wp-tests-config.php
+      sed -i 's/yourpasswordhere/wordpress/g' ./wp-tests/tags/6.0/wp-tests-config.php
 vscode:
   extensions:
     - ms-azuretools.vscode-docker
