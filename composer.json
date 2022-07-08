@@ -27,7 +27,8 @@
     "consolidation/robo": "^1.1",
     "patchwork/jsqueeze": "^2.0",
     "natxet/cssmin": "~3.0",
-    "yoast/phpunit-polyfills": "^1.0"
+    "yoast/phpunit-polyfills": "^1.0",
+    "php-coveralls/php-coveralls": "^2.5"
   },
   "extra": {
     "wordpress-install-dir": "wp"
