@@ -53,4 +53,4 @@ jobs:
       - name: Upload coverage results to Scrutinizer CI
         run: |
           wget https://scrutinizer-ci.com/ocular.phar
-          php ocular.phar code-coverage:upload --format=php-clover /build/logs/clover.xml
+          php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
