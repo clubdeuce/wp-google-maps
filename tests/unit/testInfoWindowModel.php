@@ -110,7 +110,7 @@ class TestInfoWindowModel extends TestCase {
 
 		$position = $this->_model->position();
 
-		$this->assertInternalType('array', $position);
+		$this->assertIsArray($position);
 		$this->assertArrayHasKey('lat', $position);
 		$this->assertArrayHasKey('lng', $position);
 		$this->assertNull($position['lat']);

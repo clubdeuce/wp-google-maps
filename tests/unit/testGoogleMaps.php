@@ -66,7 +66,7 @@ class TestGoogleMaps extends TestCase {
 
 		$conditions = $this->reflectionMethodInvoke(Google_Maps::class, '_script_conditions');
 
-		$this->assertInternalType('array', $conditions);
+		$this->assertIsArray($conditions);
 		$this->assertContains('is_search', $conditions);
 
 	}
@@ -125,7 +125,7 @@ class TestGoogleMaps extends TestCase {
 	 */
 	public function testVersion() {
 
-		$this->assertInternalType('string', Google_Maps::version());
+		$this->assertIsString(Google_Maps::version());
 	}
 
 	/**

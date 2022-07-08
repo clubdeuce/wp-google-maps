@@ -47,7 +47,7 @@ class TestGeocoder extends TestCase {
 	public function testMakeUrl() {
 		$response = $this->reflectionMethodInvokeArgs($this->_geocoder, '_make_url', '123 Anywhere Street New York 10001');
 
-		$this->assertInternalType('string', $response);
+		$this->assertIsString($response);
 		$this->assertRegExp('/address\=123\+Anywhere\+Street\+New\+York\+10001/', $response);
 		$this->assertRegExp("/key={$this->_api_key}/", $response);
 	}
@@ -69,15 +69,15 @@ class TestGeocoder extends TestCase {
 		$this->assertEquals(37.4224764, $location->latitude());
 		$this->assertEquals(-122.0842499, $location->longitude());
 		$this->assertEquals('ChIJ2eUgeAK6j4ARbn5u_wAGqWA', $location->place_id());
-		$this->assertInternalType('array', $location->viewport());
+		$this->assertIsArray($location->viewport());
 		$this->assertArrayHasKey('northeast', $location->viewport());
 		$this->assertArrayHasKey('southwest', $location->viewport());
-		$this->assertInternalType('array', $location->viewport()['northeast']);
+		$this->assertIsArray($location->viewport()['northeast']);
 		$this->assertArrayHasKey('lat', $location->viewport()['northeast']);
 		$this->assertArrayHasKey('lng', $location->viewport()['northeast']);
 		$this->assertEquals(37.4238253802915, $location->viewport()['northeast']['lat']);
 		$this->assertEquals(-122.0829009197085, $location->viewport()['northeast']['lng']);
-		$this->assertInternalType('array', $location->viewport()['southwest']);
+		$this->assertIsArray($location->viewport()['southwest']);
 		$this->assertArrayHasKey('lat', $location->viewport()['southwest']);
 		$this->assertArrayHasKey('lng', $location->viewport()['southwest']);
 		$this->assertEquals(37.4211274197085, $location->viewport()['southwest']['lat']);

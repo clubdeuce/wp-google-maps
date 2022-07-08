@@ -93,15 +93,15 @@ class testMapModel extends TestCase {
 
 		$args = $this->_model->make_args();
 
-		$this->assertInternalType('array', $args);
+		$this->assertIsArray($args);
 		$this->assertArrayHasKey('center', $args);
 		$this->assertArrayHasKey('zoom', $args);
-		$this->assertInternalType('array', $args['center']);
-		$this->assertInternalType('integer', $args['zoom']);
+		$this->assertIsArray($args['center']);
+		$this->assertIsInt($args['zoom']);
 		$this->assertArrayHasKey('lat', $args['center']);
 		$this->assertArrayHasKey('lat', $args['center']);
-		$this->assertInternalType('float', $args['center']['lat']);
-		$this->assertInternalType('float', $args['center']['lng']);
+		$this->assertIsFloat($args['center']['lat']);
+		$this->assertIsFloat($args['center']['lng']);
 
 	}
 
@@ -130,7 +130,7 @@ class testMapModel extends TestCase {
 
 		$id = $this->_model->html_id();
 
-		$this->assertInternalType('string', $id);
+		$this->assertIsString($id);
 		$this->assertStringStartsWith('map-', $id);
 
 	}

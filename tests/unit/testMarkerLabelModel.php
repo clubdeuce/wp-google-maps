@@ -40,11 +40,11 @@ class testMarkerLabelModel extends TestCase {
 	public function testDefaults() {
 
 		$this->assertEquals('black', $this->_model->color());
-		$this->assertInternalType('string', $this->_model->font_family());
+		$this->assertIsString($this->_model->font_family());
 		$this->assertEmpty($this->_model->font_family());
 		$this->assertEquals('14px', $this->_model->font_size());
 		$this->assertEquals('400', $this->_model->font_weight());
-		$this->assertInternalType('string', $this->_model->text());
+		$this->assertIsString($this->_model->text());
 		$this->assertEmpty($this->_model->text());
 
 	}
@@ -154,7 +154,7 @@ class testMarkerLabelModel extends TestCase {
 
 		$options = $label->options();
 
-		$this->assertInternalType('array', $options);
+		$this->assertIsArray($options);
 		$this->assertArrayHasKey('color', $options);
 		$this->assertArrayHasKey('fontFamily', $options);
 		$this->assertArrayHasKey('fontSize', $options);

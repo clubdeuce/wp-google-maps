@@ -112,7 +112,7 @@ class TestMarkerModel extends TestCase {
 
 		$args = $this->_model->marker_args();
 
-		$this->assertInternalType('array', $args);
+		$this->assertIsArray($args);
 		$this->assertArrayHasKey('position', $args);
 		$this->assertArrayHasKey('label', $args);
 		$this->assertArrayHasKey('title', $args);
@@ -131,9 +131,9 @@ class TestMarkerModel extends TestCase {
 
 		$this->_model->set_icon('http://example.com/foo.png');
 
-		$this->assertInternalType('array', $icon = $this->_model->icon() );
+		$this->assertIsArray($icon = $this->_model->icon() );
 		$this->assertArrayHasKey('url', $icon);
-		$this->assertInternalType('string', $icon['url']);
+		$this->assertIsString($icon['url']);
 		$this->assertEquals('http://example.com/foo.png', $icon['url']);
 
 	}

@@ -35,9 +35,9 @@ class testMarker extends TestCase {
 	public function testInfoWindow() {
 		$window = $this->_marker->info_window();
 
-		$this->assertInternalType('string', $window->content());
-		$this->assertInternalType('integer', $window->pixel_offset());
-		$this->assertInternalType('array', $window->position());
+		$this->assertIsString($window->content());
+		$this->assertIsInt($window->pixel_offset());
+		$this->assertIsArray($window->position());
 		$this->assertNull($window->max_width());
 	}
 
@@ -48,11 +48,11 @@ class testMarker extends TestCase {
 	public function testMarkerLabel() {
 		$label = $this->_marker->label();
 
-		$this->assertInternalType('string', $label->color());
-		$this->assertInternalType('string', $label->font_family());
-		$this->assertInternalType('string', $label->font_size());
-		$this->assertInternalType('string', $label->font_weight());
-		$this->assertInternalType('string', $label->text());
+		$this->assertIsString($label->color());
+		$this->assertIsString($label->font_family());
+		$this->assertIsString($label->font_size());
+		$this->assertIsString($label->font_weight());
+		$this->assertIsString($label->text());
 	}
 
 	/**
@@ -61,7 +61,7 @@ class testMarker extends TestCase {
 	public function testMarkerArgs() {
 		$args = $this->_marker->marker_args();
 
-		$this->assertInternalType('array', $args);
+		$this->assertIsArray($args);
 		$this->assertArrayHasKey('opacity', $args );
 		$this->assertArrayHasKey('position', $args );
 		$this->assertArrayHasKey('title', $args);

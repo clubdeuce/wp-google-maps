@@ -34,23 +34,23 @@ class TestGeocoder extends TestCase {
 		$location = $this->_geocoder->geocode('1600 Pennsylvania Avenue NW Washington DC');
 
 		$this->assertInstanceOf(Location::class, $location);
-		$this->assertInternalType('string', $location->address());
-		$this->assertInternalType('string', $location->formatted_address());
-		$this->assertInternalType('double', $location->latitude());
-		$this->assertInternalType('double', $location->longitude());
-		$this->assertInternalType('array', $location->viewport());
+		$this->assertIsString($location->address());
+		$this->assertIsString($location->formatted_address());
+		$this->assertIsFloat($location->latitude());
+		$this->assertIsFloat($location->longitude());
+		$this->assertIsArray($location->viewport());
 		$this->assertArrayHasKey('northeast', $location->viewport());
 		$this->assertArrayHasKey('southwest', $location->viewport());
-		$this->assertInternalType('array', $location->viewport()['northeast']);
+		$this->assertIsArray($location->viewport()['northeast']);
 		$this->assertArrayHasKey('lat', $location->viewport()['northeast']);
 		$this->assertArrayHasKey('lng', $location->viewport()['northeast']);
-		$this->assertInternalType('double', $location->viewport()['northeast']['lat']);
-		$this->assertInternalType('double', $location->viewport()['northeast']['lng']);
-		$this->assertInternalType('array', $location->viewport()['southwest']);
+		$this->assertIsFloat($location->viewport()['northeast']['lat']);
+		$this->assertIsFloat($location->viewport()['northeast']['lng']);
+		$this->assertIsArray($location->viewport()['southwest']);
 		$this->assertArrayHasKey('lat', $location->viewport()['southwest']);
 		$this->assertArrayHasKey('lng', $location->viewport()['southwest']);
-		$this->assertInternalType('double', $location->viewport()['southwest']['lat']);
-		$this->assertInternalType('double', $location->viewport()['southwest']['lng']);
+		$this->assertIsFloat($location->viewport()['southwest']['lat']);
+		$this->assertIsFloat($location->viewport()['southwest']['lng']);
 	}
 
 	/**

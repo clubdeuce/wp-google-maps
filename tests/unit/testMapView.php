@@ -31,7 +31,7 @@ class testMapView extends TestCase {
 	public function testMakeMarkersArgs() {
 		$args = $this->reflectionMethodInvoke($this->_view, '_make_markers_args');
 
-		$this->assertInternalType('array', $args);
+		$this->assertIsArray($args);
 
 		$item = $args[0];
 		$this->assertArrayHasKey('opacity', $item);
@@ -39,11 +39,11 @@ class testMapView extends TestCase {
 		$this->assertArrayHasKey('position', $item);
 		$this->assertArrayHasKey('title', $item);
 		$this->assertArrayHasKey('label', $item);
-		$this->assertInternalType('array', $item['position']);
+		$this->assertIsArray($item['position']);
 		$this->assertArrayHasKey('lat', $item['position']);
 		$this->assertArrayHasKey('lng', $item['position']);
-		$this->assertInternalType('string', $item['title']);
-		$this->assertInternalType('array', $item['label']);
+		$this->assertIsString($item['title']);
+		$this->assertIsArray($item['label']);
 	}
 
 	/**
@@ -52,7 +52,7 @@ class testMapView extends TestCase {
 	public function testMakeLabelArgs() {
 		$args = $this->reflectionMethodInvokeArgs($this->_view, '_make_label_args', $this->getMockLabel());
 
-		$this->assertInternalType('array', $args);
+		$this->assertIsArray($args);
 		$this->assertArrayHasKey('fontFamily', $args);
 		$this->assertArrayHasKey('fontSize', $args);
 		$this->assertArrayHasKey('fontWeight', $args);
@@ -66,11 +66,11 @@ class testMapView extends TestCase {
 	public function testMakeInfoWindows() {
 		$windows = $this->reflectionMethodInvoke($this->_view, '_make_info_windows');
 
-		$this->assertInternalType('array', $windows);
+		$this->assertIsArray($windows);
 
 		$window = $windows[0];
 
-		$this->assertInternalType('array', $window);
+		$this->assertIsArray($window);
 		$this->assertArrayHasKey('content', $window);
 		$this->assertArrayHasKey('pixel_offset', $window);
 		$this->assertArrayHasKey('position', $window);
@@ -97,7 +97,7 @@ class testMapView extends TestCase {
 
 		$params = $this->reflectionMethodInvoke($this->_view, '_map_params');
 
-		$this->assertInternalType('array', $params);
+		$this->assertIsArray($params);
 
 		$this->assertArrayHasKey('center', $params);
 		$this->assertArrayHasKey('zoom', $params);

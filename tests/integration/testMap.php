@@ -59,16 +59,16 @@ class TestMap extends TestCase {
 	public function testMarkers() {
 		$markers = $this->_map->markers();
 
-		$this->assertInternalType('array', $markers);
+		$this->assertIsArray($markers);
 
 		$marker = $markers[0];
 		$this->assertInstanceOf('\Clubdeuce\WPGoogleMaps\Location', $marker->location());
 		$this->assertInstanceOf('\Clubdeuce\WPGoogleMaps\Marker_Label', $marker->label());
-		$this->assertInternalType('double', $marker->latitude());
-		$this->assertInternalType('double', $marker->longitude());
-		$this->assertInternalType('string', $marker->title());
+		$this->assertIsFloat($marker->latitude());
+		$this->assertIsFloat($marker->longitude());
+		$this->assertIsString($marker->title());
 		$this->assertInstanceOf('\Clubdeuce\WPGoogleMaps\Info_Window', $marker->info_window());
-		$this->assertInternalType('array', $args = $marker->marker_args());
+		$this->assertIsArray($args = $marker->marker_args());
 		$this->assertArrayHasKey('title', $args);
 		$this->assertArrayHasKey('opacity', $args);
 
@@ -82,7 +82,7 @@ class TestMap extends TestCase {
 	public function testStyle() {
 		$style = $this->_map->styles();
 
-		$this->assertInternalType('array', $style);
+		$this->assertIsArray($style);
 		$this->assertArrayHasKey('foo', $style);
 		$this->assertEquals('bar', $style['foo']);
 	}
@@ -99,10 +99,10 @@ class TestMap extends TestCase {
 
 		$params = ob_get_clean();
 
-		$this->assertInternalType('string', $params);
+		$this->assertIsString($params);
 
 		$params = json_decode($params, true);
-		$this->assertInternalType('array', $params);
+		$this->assertIsArray($params);
 		$this->assertArrayHasKey('center', $params);
 		$this->assertArrayHasKey('zoom', $params);
 	}

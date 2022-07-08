@@ -29,7 +29,7 @@ class TestHttp extends TestCase {
 	 * @covers ::make_request
 	 */
 	public function testMakeRequest() {
-		$this->assertInternalType('array', $this->_http->make_request('https://wordpress.com'));
+		$this->assertIsArray($this->_http->make_request('https://wordpress.com'));
 	}
 
 	/**
