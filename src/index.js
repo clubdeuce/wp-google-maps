@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
  * Create a Google map and add it to the gmMaps global varable.
  * 
  * @param {string} mapId       The DOM element id that should contain the map
- * @param {oject} mapParams    The map parameters. At least the 'center' element must be defined. See https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+ * @param {object} mapParams    The map parameters. At least the 'center' element must be defined. See https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
  * @param {array} markers      An array containing map markers
  * @param {array} infoWindows  An array containing info window objects
  */
