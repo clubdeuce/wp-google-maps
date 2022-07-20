@@ -5,7 +5,7 @@ import Map from './modules/Map';
 
 window.gmMaps = {};
 
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function () {
 
     if ("https:" === window.location.protocol) {
         userLocation().then(position => {
