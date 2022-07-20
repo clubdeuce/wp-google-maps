@@ -19,4 +19,5 @@ jobs:
         run: composer install --prefer-dist --no-progress
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2022.1.1
-        args: -i includes
+        with:
+          args: -d includes
