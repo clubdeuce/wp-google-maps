@@ -20,4 +20,4 @@ jobs:
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2022.1.1
         with:
-          args: -d includes
+          args: -d ./includes
