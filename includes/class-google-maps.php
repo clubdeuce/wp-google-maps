@@ -11,7 +11,7 @@ class Google_Maps {
 	/**
 	 * @var string
 	 */
-	protected static $_version = '0.3.0';
+	protected static $_version = '0.4.0';
 
 	/**
 	 * @var string
