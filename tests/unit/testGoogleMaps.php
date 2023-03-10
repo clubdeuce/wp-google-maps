@@ -11,7 +11,7 @@ use Clubdeuce\WPGoogleMaps\Tests\TestCase;
 /**
  * Class TestGoogleMaps
  * @package            Clubdeuce\WPGoogleMaps\Tests\UnitTests
- * @coversDefaultClass Clubdeuce\WPGoogleMaps\Google_Maps
+ * @coversDefaultClass \Clubdeuce\WPGoogleMaps\Google_Maps
  */
 class TestGoogleMaps extends TestCase {
 
@@ -27,6 +27,16 @@ class TestGoogleMaps extends TestCase {
 	}
 
 	/**
+	 * @covers ::register_client_api_key
+	 * @covers ::client_api_key
+	 */
+	public function testClientAPIKey() {
+
+		Google_Maps::register_client_api_key('56789');
+		$this->assertEquals('56789', Google_Maps::client_api_key());
+	}
+	/**
+	 *
 	 * @covers ::initialize
 	 */
 	public function testInitialize() {
