@@ -19,6 +19,11 @@ class Google_Maps {
 	protected static $_api_key = '';
 
 	/**
+	 * @var string
+	 */
+	protected static $_client_api_key = '';
+
+	/**
 	 * @var Geocoder
 	 */
 	protected static $_geocoder;
@@ -65,6 +70,15 @@ class Google_Maps {
 	}
 
 	/**
+	 * @return string
+	 */
+	public static function client_api_key() : string {
+		
+		return apply_filters( 'wp_google_maps_client_api_key', static::$_client_api_key );
+
+	}
+
+	/**
 	 * @param  array $args
 	 * @return Map
 	 */
@@ -81,6 +95,17 @@ class Google_Maps {
 	public static function register_api_key( $key ) {
 
 		static::$_api_key = $key;
+
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return void
+	 */
+	public static function register_client_api_key( string $key ) : void  {
+
+		static::$_client_api_key = $key;
 
 	}
 
@@ -227,7 +252,7 @@ class Google_Maps {
 	 */
 	protected static function _register_scripts() {
 
-		$key    = static::api_key();
+		$key    = static::client_api_key();
 		$source = sprintf( '%1$s/dist/main.js', self::source_url() );
 
 		wp_register_script( 'google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}", false, '3.0', true );
