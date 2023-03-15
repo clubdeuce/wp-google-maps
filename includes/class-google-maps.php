@@ -255,7 +255,7 @@ class Google_Maps {
 		$key    = static::client_api_key();
 		$source = sprintf( '%1$s/dist/main.js', self::source_url() );
 
-		wp_register_script( 'google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}", false, '3.0', true );
+		wp_register_script( 'google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}&callback=parseInt", false, '3.0', true );
 		wp_register_script( 'marker-cluster', self::source_url() . '/assets/markerclusterer.js', array( 'jquery', 'google-maps' ), self::version(), true );
 		wp_register_script( 'map-control', $source, array( 'jquery', 'google-maps', 'marker-cluster' ), self::version(), true );
 		wp_register_style( 'map', self::source_url() . '/assets/map.css' );
