@@ -253,7 +253,11 @@ class Google_Maps {
 	protected static function _register_scripts() {
 
 		$key    = static::client_api_key();
-		$source = sprintf( '%1$s/dist/main.js', self::source_url() );
+		$source = sprintf( '%1$s/dist/scripts/maps.min.js', self::source_url() );
+
+		if( 'development' === wp_get_environment_type() ) {
+			$source = sprintf( '%1$s/assets/maps.js', self::source_url() );
+		}
 
 		wp_register_script( 'google-maps', "https://maps.google.com/maps/api/js?v=3&key={$key}&callback=parseInt", false, '3.0', true );
 		wp_register_script( 'marker-cluster', self::source_url() . '/assets/markerclusterer.js', array( 'jquery', 'google-maps' ), self::version(), true );

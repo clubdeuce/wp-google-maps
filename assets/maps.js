@@ -1,6 +1,7 @@
 /* global google MarkerClusterer*/
 let geocoder   = new google.maps.Geocoder;
 let infoWindow = new google.maps.InfoWindow();
+var gmMaps     = {};
 
 /**
  * @param error
