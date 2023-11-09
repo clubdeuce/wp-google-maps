@@ -1,14 +1,13 @@
 language: php
 php:
-  - 7.1
-  - 7.2
+  - 8.0
+  - 7.4
 
 env:
-  - WP_VERSION="4.9.9"
-  - WP_VERSION="5.0"
-  - WP_VERSION="5.0.1"
-  - WP_VERSION="5.0.2"
-  - WP_VERSION="5.0.3"
+  - WP_VERSION="6.0"
+  - WP_VERSION="6.1"
+  - WP_VERSION="6.2"
+  - WP_VERSION="6.4"
 
 install:
   - composer install
@@ -27,11 +26,3 @@ script: ./vendor/bin/phpunit --coverage-clover=clover.xml -c ./tests/phpunit.xml
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover clover.xml
-
-notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/9bb02c429968e213a35f
-    on_success: change # default: always
-    on_failure: always # default: always
-    on_start: change   # default: never
