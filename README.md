@@ -24,9 +24,6 @@ A simple example:
 ```
 
 use Clubdeuce\WPGoogleMaps\Google_Maps;
-use Clubdeuce\WPGoogleMaps\Map;
-use Clubdeuce\WPGoogleMaps\Marker;
-use Clubdeuce\WPGoogleMaps\Map_View;
 
 Google_Maps::initialize();
 
