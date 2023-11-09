@@ -27,7 +27,7 @@ class TestMarkerModel extends TestCase {
 	public function setUp(): void {
 
 		$this->_model = new Marker([
-			'address'  => $this->_address,
+			'address'  => '1600 Pennsylvania Avenue, NW',
 			'geocoder' => $this->getMockGeocoder(),
 			'info_window' => $this->getMockInfoWindow(),
 			'title'    => 'Sample Title',
