@@ -48,8 +48,12 @@ jobs:
           export WP_TESTS_DIR=$PWD/wp-tests/tags/6.4
           export XDEBUG_MODE=coverage
           export MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}
-          vendor/bin/phpunit --coverage-clover build/logs/clover.xml -c tests/phpunit.xml.dist
-
+          vendor/bin/phpunit --coverage-clover build/logs/clover.xml --coverage-html report -c tests/phpunit.xml.dist
+      - name: Save coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: Coverage
+          path: report
 #      - name: Upload coverage results to Scrutinizer CI
 #        run: |
 #          wget https://scrutinizer-ci.com/ocular.phar
