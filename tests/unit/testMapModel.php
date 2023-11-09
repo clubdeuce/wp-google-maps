@@ -43,6 +43,17 @@ class testMapModel extends TestCase {
 
 	}
 
+    /**
+     * @return void
+     * @covers ::center
+     */
+    public function testCenterMapNoCenterNoMarkersReturnsNull()
+    {
+        $model = new Map_Model();
+
+        $this->assertNull($model->center());
+    }
+
 	/**
 	 * @covers ::markers
 	 */
@@ -94,10 +105,12 @@ class testMapModel extends TestCase {
 		$args = $this->_model->make_args();
 
 		$this->assertIsArray($args);
-		$this->assertArrayHasKey('center', $args);
-		$this->assertArrayHasKey('zoom', $args);
+		$this->assertArrayHasKey('center', $args, 'Missing center element');
+		$this->assertArrayHasKey('zoom', $args, 'Missing zoom element');
+        $this->assertArrayHasKey('styles', $args, 'Missing styles element');
 		$this->assertIsArray($args['center']);
 		$this->assertIsInt($args['zoom']);
+        $this->assertIsArray($args['styles']);
 		$this->assertArrayHasKey('lat', $args['center']);
 		$this->assertArrayHasKey('lat', $args['center']);
 		$this->assertIsFloat($args['center']['lat']);
@@ -183,4 +196,26 @@ class testMapModel extends TestCase {
 
 	}
 
+    /**
+     * @return void
+     * @depends testMakeArgs
+     * @covers  ::set_styles
+     */
+    public function testSetStyles() {
+        $styles = [
+            'foo' => 'bar'
+        ];
+
+        $this->_model->set_styles($styles);
+        $this->assertEquals($styles, $this->_model->make_args()['styles']);
+    }
+
+    /**
+     * @return  void
+     * @covers  ::set_styles
+     */
+    public function testSetStylesThrowsError() {
+        $this->expectError();
+        $this->_model->set_styles('foo');
+    }
 }

@@ -106,4 +106,22 @@ class TestMap extends TestCase {
 		$this->assertArrayHasKey('center', $params);
 		$this->assertArrayHasKey('zoom', $params);
 	}
+
+    /**
+     * @return  void
+     * @covers  \Clubdeuce\WPGoogleMaps\Map_Model::center
+     * @uses    \Clubdeuce\WPGoogleMaps\Map_Model::add_marker
+     */
+    public function testCenterNoCenterOneMarker() {
+        $model  = new Map();
+        $marker = new Marker(array(
+            'address'       => '1600 Pennsylvania Avenue, NW Washington, DC',
+            'title'         => 'Sample Location',
+            'opacity'       => 0.5,
+        ));
+
+        $model->add_marker($marker);
+
+        $this->assertEquals($marker->position(), $model->center());
+    }
 }
