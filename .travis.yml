@@ -9,6 +9,9 @@ env:
   - WP_VERSION="6.2"
   - WP_VERSION="6.4"
 
+services:
+  - mysql
+
 install:
   - composer install
 
