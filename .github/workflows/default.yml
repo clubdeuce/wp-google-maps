@@ -30,11 +30,11 @@ jobs:
 
       - name: Checkout WP
         run: |
-          svn co https://develop.svn.wordpress.org/tags/6.0 ./wp-tests/tags/6.0
-          cp ./wp-tests/tags/6.0/wp-tests-config-sample.php ./wp-tests/tags/6.0/wp-tests-config.php
-          sed -i 's/youremptytestdbnamehere/wordpress/g' ./wp-tests/tags/6.0/wp-tests-config.php
-          sed -i 's/yourusernamehere/wordpress/g' ./wp-tests/tags/6.0/wp-tests-config.php
-          sed -i 's/yourpasswordhere/wordpress/g' ./wp-tests/tags/6.0/wp-tests-config.php
+          svn co https://develop.svn.wordpress.org/tags/6.4 ./wp-tests/tags/6.4
+          cp ./wp-tests/tags/6.4/wp-tests-config-sample.php ./wp-tests/tags/6.4/wp-tests-config.php
+          sed -i 's/youremptytestdbnamehere/wordpress/g' ./wp-tests/tags/6.4/wp-tests-config.php
+          sed -i 's/yourusernamehere/wordpress/g' ./wp-tests/tags/6.4/wp-tests-config.php
+          sed -i 's/yourpasswordhere/wordpress/g' ./wp-tests/tags/6.4/wp-tests-config.php
 
       - name: Start MySQL
         run: |
@@ -45,7 +45,7 @@ jobs:
 
       - name: Run test suite
         run: |
-          export WP_TESTS_DIR=$PWD/wp-tests/tags/6.0
+          export WP_TESTS_DIR=$PWD/wp-tests/tags/6.4
           export XDEBUG_MODE=coverage
           export MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}
           vendor/bin/phpunit --coverage-clover build/logs/clover.xml -c tests/phpunit.xml.dist
